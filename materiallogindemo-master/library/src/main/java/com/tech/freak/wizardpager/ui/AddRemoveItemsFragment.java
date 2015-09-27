@@ -31,6 +31,7 @@ import com.tech.freak.wizardpager.model.AddRemoveItemsPage;
 import com.tech.freak.wizardpager.R;
 import com.tech.freak.wizardpager.model.Page;
 import com.tech.freak.wizardpager.model.ProductItem;
+import com.tech.freak.wizardpager.model.Products;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,7 +41,7 @@ public class AddRemoveItemsFragment extends Fragment {
     private static final String ARG_KEY = "key";
 
     private PageFragmentCallbacks mCallbacks;
-    private ArrayList<ProductItem> mChoices;
+    private ArrayList<Products> mChoices;
     private String mKey;
     private Page mPage;
 
@@ -75,7 +76,7 @@ public class AddRemoveItemsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.custom_fragment_page, container, false);
         ((TextView) rootView.findViewById(android.R.id.title)).setText(mPage.getTitle());
 

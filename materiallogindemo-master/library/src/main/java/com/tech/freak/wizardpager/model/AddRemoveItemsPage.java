@@ -29,7 +29,7 @@ import java.util.LinkedHashMap;
  * A page offering the user a number of mutually exclusive choices.
  */
 public class AddRemoveItemsPage extends Page {
-    protected ArrayList<ProductItem> mChoices;
+    protected ArrayList<Products> mChoices;
 
     public AddRemoveItemsPage(ModelCallbacks callbacks, String title) {
         super(callbacks, title);
@@ -40,7 +40,7 @@ public class AddRemoveItemsPage extends Page {
         return AddRemoveItemsFragment.create(getKey());
     }
 
-    public ArrayList<ProductItem> getAllChoices() {
+    public ArrayList<Products> getAllChoices() {
         return mChoices;
     }
 
@@ -58,7 +58,7 @@ public class AddRemoveItemsPage extends Page {
         return !TextUtils.isEmpty(mData.getString(SIMPLE_DATA_KEY));
     }
 
-    public AddRemoveItemsPage setChoices(ArrayList<ProductItem> choices) {
+    public AddRemoveItemsPage setChoices(ArrayList<Products> choices) {
         mChoices = choices;
         return this;
     }
@@ -72,7 +72,7 @@ public class AddRemoveItemsPage extends Page {
     public void getReviewItems(ArrayList<ReviewItem> dest) {
         StringBuilder sb = new StringBuilder();
 
-        for(ProductItem lChoices: mChoices)
+        for(Products lChoices: mChoices)
         {
             sb.append(lChoices.getReviewString());
             sb.append("\n");

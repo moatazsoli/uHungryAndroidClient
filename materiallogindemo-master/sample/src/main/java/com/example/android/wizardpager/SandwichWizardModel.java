@@ -22,15 +22,20 @@ import com.example.android.wizardpager.pages.CustomerInfoPage;
 import com.tech.freak.wizardpager.model.AddRemoveItemsPage;
 import com.tech.freak.wizardpager.model.AbstractWizardModel;
 import com.tech.freak.wizardpager.model.BranchPage;
+import com.tech.freak.wizardpager.model.DrinkItem;
+import com.tech.freak.wizardpager.model.FoodItem;
 import com.tech.freak.wizardpager.model.MultipleFixedChoicePage;
 import com.tech.freak.wizardpager.model.NumberPage;
 import com.tech.freak.wizardpager.model.PageList;
 import com.tech.freak.wizardpager.model.ProductItem;
+import com.tech.freak.wizardpager.model.Products;
 import com.tech.freak.wizardpager.model.Restaurant;
 import com.tech.freak.wizardpager.model.SingleFixedChoicePage;
 import com.tech.freak.wizardpager.model.TextPage;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 public class SandwichWizardModel extends AbstractWizardModel {
@@ -43,18 +48,120 @@ public class SandwichWizardModel extends AbstractWizardModel {
         @Override
     protected PageList onNewRootPageList() {
             lTim = new Restaurant("Tim Hortons");
-            lTim.setProducts(new LinkedHashMap<String, ArrayList<ProductItem>>()
+            lTim.setProducts(new LinkedHashMap<String, ArrayList<Products>>()
                              {{
-                                     put("Food", new ArrayList<ProductItem>() {{
-                                         add(new ProductItem("Bagel",3.0));
-                                         add(new ProductItem("Danish",3.5));
-                                         add(new ProductItem("Sandwich",4.0));
+                                     put("Food", new ArrayList<Products>() {{
+                                         add(new FoodItem("Bagel",
+                                                         new HashMap<String, Double>(){{put("S",1.95);}},
+                                                         new HashMap<String, ArrayList<String>>(){{
+                                                             put("Bread",new ArrayList<String>(){{
+                                                                 add("Plain");
+                                                                 add("Sesame");
+                                                                 add("Everything");
+                                                             }});
+                                                             put("Veggies",new ArrayList<String>(){{
+                                                                 add("Lettuce");
+                                                                 add("Tomatoes");
+                                                             }});
+                                                             put("Cheese",new ArrayList<String>(){{
+                                                                 add("Cream Cheese");
+                                                                 add("Herb/Garlic");
+                                                                 add("Light");
+                                                             }});
+                                                         }}
+                                                 )
+                                         );
+                                         add(new FoodItem("Donut",
+                                                         new HashMap<String, Double>(){{put("S",0.99);}},
+                                                         new HashMap<String, ArrayList<String>>(){{
+                                                             put("Type",new ArrayList<String>(){{
+                                                                 add("Apple Fritter");
+                                                                 add("Chocolate Dip");
+                                                                 add("Honey Dip");
+                                                                 add("Vanilla Dip");
+                                                                 add("Maple Dip");
+                                                                 add("Chocolate Glazed");
+                                                                 add("Double Chocolate");
+                                                                 add("Old Fashion Plain");
+                                                                 add("Old Fashion Glazed");
+                                                                 add("Sour Cream Plain");
+                                                                 add("Boston Cream");
+                                                                 add("Honey Cruller");
+                                                                 add("Canadian Maple");
+                                                             }});
+                                                         }}
+                                                 )
+                                         );
                                      }});
 
-                                     put("Drink", new ArrayList<ProductItem>() {{
-                                         add(new ProductItem("Coffee",1.99));
-                                         add(new ProductItem("Tea",2.5));
-                                         add(new ProductItem("Water",2.0));
+                                     put("Drinks", new ArrayList<Products>() {{
+                                         add(new DrinkItem("Coffee",
+                                                         new HashMap<String, Double>(){{put("S",1.33);put("M",1.57);put("L",1.71);put("XL",1.9);}},
+                                                         DrinkItem.NO_OPTIONS,
+                                                         null
+                                                 )
+                                         );
+                                         add(new DrinkItem("French Vanilla",
+                                                         new HashMap<String, Double>(){{put("S",1.74);put("M",2.05);put("L",2.35);put("XL",2.59);}},
+                                                         DrinkItem.NO_OPTIONS,
+                                                         null
+                                                 )
+                                         );
+                                         add(new DrinkItem("Iced Cap",
+                                                         new HashMap<String, Double>(){{put("S",1.89);put("M",2.61);put("L",3.23);}},
+                                                         DrinkItem.NO_OPTIONS,
+                                                         null
+                                                 )
+                                         );
+                                         add(new DrinkItem("Hot Chocolate",
+                                                         new HashMap<String, Double>(){{put("S",1.43);put("M",1.67);put("L",1.92);put("XL",2.11);}},
+                                                         DrinkItem.NO_OPTIONS,
+                                                         null
+                                                 )
+                                         );
+                                         add(new DrinkItem("Tea",
+                                                         new HashMap<String, Double>(){{put("S",1.33);put("M",1.52);put("L",1.71);put("XL",1.9);}},
+                                                         DrinkItem.SIGNLE_CHOICE,
+                                                         new ArrayList<String>(Arrays.asList("Steeped","Green Tea","Honey Lemon","Apple Cinnamon","Blueberry White","Pomegranate White","Chamomile","Peppermint",
+                                                                 "Chai Tea","Orange Pekoe","Earl Grey","English Breakfast","Decaf Orange Pekoe"))
+                                                 )
+                                         );
+                                         add(new DrinkItem("Latte",
+                                                         new HashMap<String, Double>(){{put("S",2.00);put("M",2.59);put("L",3.29);}},
+                                                         DrinkItem.NO_OPTIONS,
+                                                         null
+                                                 )
+                                         );
+                                         add(new DrinkItem("Cappuccino",
+                                                         new HashMap<String, Double>(){{put("S",2.0);put("M",2.59);put("L",3.29);}},
+                                                         DrinkItem.NO_OPTIONS,
+                                                         null
+                                                 )
+                                         );
+                                         add(new DrinkItem("Cafe Mocha",
+                                                         new HashMap<String, Double>(){{put("S",1.99);put("M",2.36);put("L",2.54);put("XL",2.86);}},
+                                                         DrinkItem.NO_OPTIONS,
+                                                         null
+                                                 )
+                                         );
+                                         add(new DrinkItem("Iced Coffee",
+                                                         new HashMap<String, Double>(){{put("S",1.48);put("M",1.81);put("L",2.13);}},
+                                                         DrinkItem.NO_OPTIONS,
+                                                         null
+                                                 )
+                                         );
+                                         add(new DrinkItem("Lemonade",
+                                                         new HashMap<String, Double>(){{put("S",1.49);put("M",2.0);put("L",2.33);}},
+                                                         DrinkItem.NO_OPTIONS,
+                                                         null
+                                                 )
+                                         );
+                                         add(new DrinkItem("Smoothie",
+                                                         new HashMap<String, Double>(){{put("S",2.69);put("M",3.49);put("L",4.29);}},
+                                                         DrinkItem.NO_OPTIONS,
+                                                         null
+                                                 )
+                                         );
                                      }});
                                  }}
 

@@ -3,25 +3,25 @@ package com.tech.freak.wizardpager.model;
 /**
  * Created by Moataz on 2015-09-12.
  */
-public class ProductItem {
+public class ProductItem implements Products {
 
     public Double PRICE;
     public String ITEM_NAME;
-    private int quantitiy;
+    private int quantity;
 
     public ProductItem(String aInItemName, Double aInPrice) {
         ITEM_NAME = aInItemName;
         PRICE = aInPrice;
-        quantitiy = 0;
+        quantity = 0;
     }
 
     public int getQuantity()
     {
-        return quantitiy;
+        return quantity;
     }
-    public void setQuantitiy(int aInQuantity)
+    public void setQuantity(int aInQuantity)
     {
-        quantitiy = aInQuantity;
+        quantity = aInQuantity;
     }
     public String getItemName()
     {
@@ -30,6 +30,6 @@ public class ProductItem {
 
     public String getReviewString()
     {
-        return ITEM_NAME +" ("+quantitiy+")";
+        return ITEM_NAME +" ("+quantity+")";
     }
 }

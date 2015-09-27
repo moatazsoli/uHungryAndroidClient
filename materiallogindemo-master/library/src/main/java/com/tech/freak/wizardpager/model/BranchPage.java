@@ -73,10 +73,16 @@ public class BranchPage extends SingleFixedChoicePage {
     public BranchPage addRestaurant(Restaurant aInRestaurent, ModelCallbacks callbacks)
     {
         ArrayList<Page> lPages = new ArrayList<Page>();
-        LinkedHashMap<String, ArrayList<ProductItem>> lProducts = aInRestaurent.getProducts();
+        LinkedHashMap<String, ArrayList<Products>> lProducts = aInRestaurent.getProducts();
 
         for (String key : lProducts.keySet()) {
-            lPages.add(new AddRemoveItemsPage(callbacks, key).setChoices(lProducts.get(key)));
+            if(key.equals("Food"))
+            {
+                lPages.add(new AddRemoveItemsPage(callbacks, key).setChoices(lProducts.get(key)));
+            }else if(key.equals("Drinks"))
+            {
+                lPages.add(new AddRemoveDrinksItemsPage(callbacks, key).setChoices(lProducts.get(key)));
+            }
         }
         PageList childPageList = new PageList(lPages);
         for (Page page : childPageList) {

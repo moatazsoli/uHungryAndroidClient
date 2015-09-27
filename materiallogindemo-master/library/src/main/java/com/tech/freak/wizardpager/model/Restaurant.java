@@ -9,18 +9,18 @@ import java.util.LinkedHashMap;
 public class Restaurant {
 
     public static String RESTURANT_NAME;
-    public LinkedHashMap<String, ArrayList<ProductItem>> products;
+    public LinkedHashMap<String, ArrayList<Products>> products;
 
     public Restaurant(String aInRestaurantName) {
         RESTURANT_NAME = aInRestaurantName;
     }
 
-    public void setProducts(LinkedHashMap<String, ArrayList<ProductItem>> aInProducts)
+    public void setProducts(LinkedHashMap<String, ArrayList<Products>> aInProducts)
     {
         products = aInProducts;
     }
 
-    public LinkedHashMap<String, ArrayList<ProductItem>> getProducts()
+    public LinkedHashMap<String, ArrayList<Products>> getProducts()
     {
         return products;
     }

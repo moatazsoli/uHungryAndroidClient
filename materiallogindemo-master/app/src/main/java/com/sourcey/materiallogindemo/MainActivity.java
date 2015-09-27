@@ -11,12 +11,20 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
     private  final static int LOGIN_ACITIVITY_CODE = 0x12;
+    private final static boolean DEBUG = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivityForResult(intent, LOGIN_ACITIVITY_CODE);
+        if(DEBUG)
+        {
+            Intent intent = new Intent(this, com.example.android.wizardpager.MainActivity.class);
+            startActivity(intent);
+            finish();
+        }else {
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivityForResult(intent, LOGIN_ACITIVITY_CODE);
+        }
     }
 
     @Override

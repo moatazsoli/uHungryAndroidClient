@@ -19,8 +19,17 @@
     <color name="step_pager_selected_tab_color">#ff0099cc</color>
     <color name="step_pager_selected_last_tab_color">#ff669900</color>
     <color name="step_pager_next_tab_color">#10000000</color>
-
+    <color name="accent">#ff33b5e5</color>
+    <color name="accent_alpha26">#4233b5e5</color>
+    <color name="background_holo_dark">#ff000000</color>
+    <color name="background_holo_light">#fff3f3f3</color>
     <color name="review_green">#ff669900</color>
+    <color name="radio_button_selected_color">#ff33b5e5</color>
+    <color name="radio_button_unselected_color">@android:color/transparent</color>
+    <color name="material_indigo_500">#3F51B5</color>
+    <color name="material_indigo_600">#3949AB</color>
+    <color name="material_teal_500">#009688</color>
+    <color name="material_red_400">#EF5350</color>
 
     <color name="text_light">#66000000</color>
 </resources>
