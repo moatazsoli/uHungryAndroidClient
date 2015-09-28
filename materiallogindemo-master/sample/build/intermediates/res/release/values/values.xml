@@ -412,6 +412,7 @@
     <eat-comment/>
     <string name="add_account">Add account</string>
     <string name="add_drink">Add Drink</string>
+    <string name="add_food">Add Food</string>
     <string name="agree">Agree</string>
     <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/src/main/res/values/strings.xml -->
     <eat-comment/>
@@ -454,6 +455,7 @@
     <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/materiallogindemo-master/library/unspecified/res/values/values.xml -->
     <eat-comment/>
     <string name="folder_chooser">Folder Chooser</string>
+    <string name="food_hint"><font size="12">E.g. Toasted ? ..</font></string>
     <string name="geo_status_found">Location found</string>
     <string name="geo_status_location">%1$s \n(%2$s)</string>
     <string name="geo_status_searching">Waiting GPS …</string>
@@ -520,6 +522,7 @@
     <string name="signalStrength">Signal strength</string>
     <string name="simple_list">Simple Dialog (Guidelines Spec)</string>
     <string name="singleChoice">Single Choice</string>
+    <string name="size">Size</string>
     <string name="skip_button_label">Skip</string>
     <string name="socialNetworks">Social Networks</string>
     <string name="speedBoost">Turn on speed boost now!</string>

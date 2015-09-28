@@ -8,7 +8,7 @@ import java.util.HashMap;
  */
 public class FoodCache {
 
-    HashMap<String,ArrayList<SelectedProduct>> selectedProducts = new HashMap<String,ArrayList<SelectedProduct>>();
+    private HashMap<String,ArrayList<SelectedFoodItem>> selectedProducts = new HashMap<String,ArrayList<SelectedFoodItem>>();
 
     private static FoodCache instance = null;
     protected FoodCache() {
@@ -21,13 +21,13 @@ public class FoodCache {
         return instance;
     }
 
-    public void addProduct(String aInProductName, SelectedProduct aInSelectedProduct)
+    public void addProduct(String aInProductName, SelectedFoodItem aInSelectedProduct)
     {
         if(selectedProducts.containsKey(aInProductName))
         {
             selectedProducts.get(aInProductName).add(aInSelectedProduct);
         }else{
-            selectedProducts.put(aInProductName,new ArrayList<SelectedProduct>());
+            selectedProducts.put(aInProductName,new ArrayList<SelectedFoodItem>());
             selectedProducts.get(aInProductName).add(aInSelectedProduct);
         }
     }
@@ -36,7 +36,7 @@ public class FoodCache {
     {
         if(selectedProducts.containsKey(aInProductName))
         {
-            ArrayList<SelectedProduct> lArray =  selectedProducts.get(aInProductName);
+            ArrayList<SelectedFoodItem> lArray =  selectedProducts.get(aInProductName);
             if(lArray.size()>1)
             {
                 lArray.remove(lArray.size()-1);
@@ -44,6 +44,11 @@ public class FoodCache {
                 selectedProducts.remove(aInProductName);
             }
         }
+    }
+
+    public HashMap<String,ArrayList<SelectedFoodItem>> getSelectedProducts()
+    {
+        return selectedProducts;
     }
 
 

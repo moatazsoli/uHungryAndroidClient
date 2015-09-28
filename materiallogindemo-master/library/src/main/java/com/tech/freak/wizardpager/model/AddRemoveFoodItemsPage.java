@@ -23,6 +23,7 @@ import com.tech.freak.wizardpager.ui.AddRemoveDrinksItemsFragment;
 import com.tech.freak.wizardpager.ui.AddRemoveFoodItemsFragment;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * A page offering the user a number of mutually exclusive choices.
@@ -74,15 +75,33 @@ public class AddRemoveFoodItemsPage extends Page {
     @Override
     public void getReviewItems(ArrayList<ReviewItem> dest) {
         StringBuilder sb = new StringBuilder();
+        HashMap<String,ArrayList<SelectedFoodItem>> lSelectedFoodProducts =
+                FoodCache.getInstance().getSelectedProducts();
 
-        for(Products lChoice: mChoices)
+        for(String lProduct: lSelectedFoodProducts.keySet())
         {
-            if(lChoice.getQuantity()>0)
+            ArrayList<SelectedFoodItem> lFoodItems = lSelectedFoodProducts.get(lProduct);
+            for(SelectedFoodItem lSelectedFood:lFoodItems)
             {
-                sb.append(lChoice.getReviewString());
+                sb.append("$" + lSelectedFood.getPrice() + " - " + lSelectedFood.getItemName());
+                sb.append("\n");
+                for(String lOption: lSelectedFood.getSelectedOptions())
+                {
+                    sb.append("--- " + lOption);
+                    sb.append("\n");
+                }
+                sb.append(".....................");
                 sb.append("\n");
             }
         }
+//        for(Products lChoice: mChoices)
+//        {
+//            if(lChoice.getQuantity()>0)
+//            {
+//                sb.append(lChoice.getReviewString());
+//                sb.append("\n");
+//            }
+//        }
 
         dest.add(new ReviewItem(getTitle(), sb.toString(), getKey()));
     }

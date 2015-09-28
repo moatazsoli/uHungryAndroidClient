@@ -78,7 +78,7 @@ public class BranchPage extends SingleFixedChoicePage {
         for (String key : lProducts.keySet()) {
             if(key.equals("Food"))
             {
-                lPages.add(new AddRemoveItemsPage(callbacks, key).setChoices(lProducts.get(key)));
+                lPages.add(new AddRemoveFoodItemsPage(callbacks, key).setChoices(lProducts.get(key)));
             }else if(key.equals("Drinks"))
             {
                 lPages.add(new AddRemoveDrinksItemsPage(callbacks, key).setChoices(lProducts.get(key)));

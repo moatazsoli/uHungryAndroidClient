@@ -119,4 +119,11 @@ public class DrinkItem implements Products{
         this.selectedComments = selectedComments;
     }
 
+    public void reset()
+    {
+        setSelectedComments(null);
+        setSelectedOptions(new ArrayList<String>());
+        setSelectedSize(null);
+    }
+
 }

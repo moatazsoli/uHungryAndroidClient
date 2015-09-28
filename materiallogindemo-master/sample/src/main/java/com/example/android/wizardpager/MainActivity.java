@@ -27,6 +27,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
@@ -142,6 +143,10 @@ public class MainActivity extends ActionBarActivity implements
         updateBottomBar();
     }
 
+    public void onBackPressed() {
+        mPager.setCurrentItem(mPager.getCurrentItem() - 1);
+    }
+
     @Override
     public void onPageTreeChanged() {
         mCurrentPageSequence = mWizardModel.getCurrentPageSequence();
@@ -158,7 +163,7 @@ public class MainActivity extends ActionBarActivity implements
         if (position == mCurrentPageSequence.size()) {
             mNextButton.setText(R.string.finish);
             mNextButton.setBackgroundResource(R.drawable.finish_background);
-            mNextButton.setTextAppearance(this, R.style.TextAppearanceFinish);
+//            mNextButton.setTextAppearance(this, R.style.TextAppearanceFinish);
         } else {
             mNextButton.setText(mEditingAfterReview ? R.string.review
                     : R.string.next);

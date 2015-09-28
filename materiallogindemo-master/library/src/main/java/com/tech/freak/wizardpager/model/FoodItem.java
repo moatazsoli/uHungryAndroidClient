@@ -13,7 +13,7 @@ public class FoodItem implements Products{
     public String itemName;
     private int quantity;
     private String selectedSize;
-    private HashMap<String,ArrayList<String>> options;
+    private ArrayList<FoodOption> options;
     private ArrayList<String> selectedOptions;
     private String selectedComments;
 
@@ -24,7 +24,7 @@ public class FoodItem implements Products{
 //    }
 
     public FoodItem(String aInItemName, HashMap<String, Double> aInSizesPrices,
-                    HashMap<String, ArrayList<String>> aInOptions) {
+                    ArrayList<FoodOption> aInOptions) {
         itemName = aInItemName;
         sizesPrices = aInSizesPrices;
         options = aInOptions;
@@ -77,11 +77,11 @@ public class FoodItem implements Products{
         return selectedSize;
     }
 
-    public HashMap<String, ArrayList<String>> getOptions() {
+    public ArrayList<FoodOption> getOptions() {
         return options;
     }
 
-    public void setOptions(HashMap<String, ArrayList<String>> options) {
+    public void setOptions(ArrayList<FoodOption> options) {
         this.options = options;
     }
 
@@ -103,6 +103,13 @@ public class FoodItem implements Products{
 
     public void setSelectedComments(String selectedComments) {
         this.selectedComments = selectedComments;
+    }
+
+    public void reset()
+    {
+        setSelectedComments(null);
+        setSelectedOptions(new ArrayList<String>());
+        setSelectedSize(null);
     }
 
 }

@@ -24,6 +24,7 @@ import com.tech.freak.wizardpager.model.AbstractWizardModel;
 import com.tech.freak.wizardpager.model.BranchPage;
 import com.tech.freak.wizardpager.model.DrinkItem;
 import com.tech.freak.wizardpager.model.FoodItem;
+import com.tech.freak.wizardpager.model.FoodOption;
 import com.tech.freak.wizardpager.model.MultipleFixedChoicePage;
 import com.tech.freak.wizardpager.model.NumberPage;
 import com.tech.freak.wizardpager.model.PageList;
@@ -53,43 +54,61 @@ public class SandwichWizardModel extends AbstractWizardModel {
                                      put("Food", new ArrayList<Products>() {{
                                          add(new FoodItem("Bagel",
                                                          new HashMap<String, Double>(){{put("S",1.95);}},
-                                                         new HashMap<String, ArrayList<String>>(){{
-                                                             put("Bread",new ArrayList<String>(){{
-                                                                 add("Plain");
-                                                                 add("Sesame");
-                                                                 add("Everything");
-                                                             }});
-                                                             put("Veggies",new ArrayList<String>(){{
-                                                                 add("Lettuce");
-                                                                 add("Tomatoes");
-                                                             }});
-                                                             put("Cheese",new ArrayList<String>(){{
-                                                                 add("Cream Cheese");
-                                                                 add("Herb/Garlic");
-                                                                 add("Light");
-                                                             }});
-                                                         }}
+                                                         new ArrayList<FoodOption>(){
+                                                             {
+                                                                 add(new FoodOption("Bread",
+                                                                         FoodOption.SINGLE_CHOICE,
+                                                                         new ArrayList<String>() {{
+                                                                             add("Plain");
+                                                                             add("Sesame");
+                                                                             add("Everything");
+                                                                         }})
+                                                                 );
+                                                                 add(new FoodOption("Veggies",
+                                                                                 FoodOption.MULTI_CHOICES,
+                                                                                 new ArrayList<String>() {{
+                                                                                     add("Lettuce");
+                                                                                     add("Tomatoes");
+                                                                                 }})
+                                                                 );
+                                                                 add(new FoodOption("Cheese",
+                                                                                 FoodOption.SINGLE_CHOICE,
+                                                                                 new ArrayList<String>() {{
+                                                                                     add("Cream Cheese");
+                                                                                     add("Herb/Garlic");
+                                                                                     add("Light");
+                                                                                 }})
+                                                                 );
+                                                             }}
+
+
                                                  )
                                          );
                                          add(new FoodItem("Donut",
                                                          new HashMap<String, Double>(){{put("S",0.99);}},
-                                                         new HashMap<String, ArrayList<String>>(){{
-                                                             put("Type",new ArrayList<String>(){{
-                                                                 add("Apple Fritter");
-                                                                 add("Chocolate Dip");
-                                                                 add("Honey Dip");
-                                                                 add("Vanilla Dip");
-                                                                 add("Maple Dip");
-                                                                 add("Chocolate Glazed");
-                                                                 add("Double Chocolate");
-                                                                 add("Old Fashion Plain");
-                                                                 add("Old Fashion Glazed");
-                                                                 add("Sour Cream Plain");
-                                                                 add("Boston Cream");
-                                                                 add("Honey Cruller");
-                                                                 add("Canadian Maple");
-                                                             }});
-                                                         }}
+                                                         new ArrayList<FoodOption>(){
+                                                             {
+                                                                 add(new FoodOption("Type",
+                                                                                 FoodOption.SINGLE_CHOICE,
+                                                                                 new ArrayList<String>() {{
+                                                                                     add("Apple Fritter");
+                                                                                     add("Chocolate Dip");
+                                                                                     add("Honey Dip");
+                                                                                     add("Vanilla Dip");
+                                                                                     add("Maple Dip");
+                                                                                     add("Chocolate Glazed");
+                                                                                     add("Double Chocolate");
+                                                                                     add("Old Fashion Plain");
+                                                                                     add("Old Fashion Glazed");
+                                                                                     add("Sour Cream Plain");
+                                                                                     add("Boston Cream");
+                                                                                     add("Honey Cruller");
+                                                                                     add("Canadian Maple");
+                                                                                 }})
+                                                                 );
+                                                             }}
+
+
                                                  )
                                          );
                                      }});
@@ -202,7 +221,7 @@ public class SandwichWizardModel extends AbstractWizardModel {
                                         "No dressing", "Balsamic", "Oil & vinegar",
                                         "Thousand Island", "Italian").setValue("No dressing"),
                                 new NumberPage(this, "How Many Salads?").setRequired(true)),
-                new TextPage(this, "Comments").setRequired(true)
+                new TextPage(this, "Comments").setRequired(false)
 
                         .setRequired(true),
 

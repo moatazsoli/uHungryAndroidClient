@@ -19,13 +19,10 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.afollestad.materialdialogs.internal.MDTintHelper;
 import com.afollestad.materialdialogs.internal.ThemeSingleton;
-import com.google.common.cache.Cache;
 import com.tech.freak.wizardpager.R;
-import com.tech.freak.wizardpager.model.DrinkItem;
-import com.tech.freak.wizardpager.model.DrinksCache;
 import com.tech.freak.wizardpager.model.FoodCache;
 import com.tech.freak.wizardpager.model.FoodItem;
-import com.tech.freak.wizardpager.model.SelectedDrinkItem;
+import com.tech.freak.wizardpager.model.FoodOption;
 import com.tech.freak.wizardpager.model.SelectedFoodItem;
 
 import java.util.ArrayList;
@@ -41,6 +38,8 @@ public class FoodCustomAdapter extends BaseAdapter implements ListAdapter {
     private View currentView;
     private MaterialDialog currentDialog;
     private HashMap<String, ArrayList<String>> optionsPlaceHolder;
+    private int stepNumber = 0;
+    private ArrayList<String> lTempArrayList = new ArrayList<String>();
     public FoodCustomAdapter(ArrayList<FoodItem> aInProductList, Context context) {
         lProductList = aInProductList;
         this.context = context;
@@ -93,9 +92,6 @@ public class FoodCustomAdapter extends BaseAdapter implements ListAdapter {
         }else{
             counter.setText("");
         }
-        //TextView counter = (TextView)view.findViewById(R.id.counter);
-
-
         //Handle buttons and add onClickListeners
         ImageButton deleteBtn = (ImageButton)view.findViewById(R.id.remove_button);
         ImageButton addBtn = (ImageButton)view.findViewById(R.id.add_button);
@@ -113,6 +109,7 @@ public class FoodCustomAdapter extends BaseAdapter implements ListAdapter {
                     currentFoodItem.setQuantity(lQuantity);
                 }
                 FoodCache.getInstance().removeProduct(currentFoodItem.getItemName());
+                currentFoodItem.reset();
                 notifyDataSetChanged();
             }
         });
@@ -132,31 +129,27 @@ public class FoodCustomAdapter extends BaseAdapter implements ListAdapter {
 
         return view;
     }
-    private EditText passwordInput;
+    private EditText commentsInput;
     private View positiveAction;
 
     private void showSizesCommentsView() {
         int layout;
-        switch (currentFoodItem.getSizes())
-        {
+        switch (currentFoodItem.getSizes()) {
             case 1:
-                layout = R.layout.drink_details_1_comments_only;
+                layout = R.layout.food_details_1_comments_only;
                 break;
             case 2:
-                layout = R.layout.drink_details_2;
+                layout = R.layout.food_details_2;
                 break;
             case 3:
-                layout = R.layout.drink_details_3;
-                break;
-            case 4:
-                layout = R.layout.drink_details_4;
+                layout = R.layout.food_details_3;
                 break;
             default:
-                layout = R.layout.drink_details_1_comments_only;
+                layout = R.layout.food_details_1_comments_only;
                 break;
         }
         MaterialDialog dialog = new MaterialDialog.Builder(context)
-                .title(R.string.add_drink)
+                .title(R.string.add_food)
                 .customView(layout, true)
                 .positiveText(R.string.submit)
                 .negativeText(android.R.string.cancel)
@@ -172,45 +165,55 @@ public class FoodCustomAdapter extends BaseAdapter implements ListAdapter {
                                 currentFoodItem.getSelectedOptions(),
                                 currentFoodItem.getSelectedComments()
                         );
-                        FoodCache.getInstance().addProduct(lSelectedFoodItem.getItemName(),lSelectedFoodItem);
+                        FoodCache.getInstance().addProduct(lSelectedFoodItem.getItemName(), lSelectedFoodItem);
+                        currentFoodItem.reset();
                         int lQuantity = currentFoodItem.getQuantity();
                         lQuantity++;
                         currentFoodItem.setQuantity(lQuantity);
-                        showToast("Drink Added");
+                        showToast("Food Item Added");
                         notifyDataSetChanged();
                     }
 
                     @Override
                     public void onNegative(MaterialDialog dialog) {
+                        currentFoodItem.reset();
                     }
                 }).build();
-
+        dialog.setCanceledOnTouchOutside(false);
         SegmentedGroup segmented2 = (SegmentedGroup) dialog.getCustomView().findViewById(R.id.segmented2);
         currentDialog = dialog;
-        segmented2.setOnCheckedChangeListener(
-                new RadioGroup.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(RadioGroup group, int checkedId) {
-                        currentDialog.getActionButton(DialogAction.POSITIVE).setEnabled(true);
-                        if (checkedId == R.id.button21) {
-                            currentFoodItem.setSelectedSize("S");
-                        } else if (checkedId == R.id.button22) {
-                            currentFoodItem.setSelectedSize("M");
-                        } else if (checkedId == R.id.button23) {
-                            currentFoodItem.setSelectedSize("L");
-                        } else if (checkedId == R.id.button24) {
-                            currentFoodItem.setSelectedSize("XL");
-                        } else {
-                            currentFoodItem.setSelectedSize(null);
+        positiveAction = dialog.getActionButton(DialogAction.POSITIVE);
+        positiveAction.setEnabled(false); // disabled by default
+        if(segmented2 != null)
+        {
+            segmented2.setOnCheckedChangeListener(
+                    new RadioGroup.OnCheckedChangeListener() {
+                        @Override
+                        public void onCheckedChanged(RadioGroup group, int checkedId) {
                             currentDialog.getActionButton(DialogAction.POSITIVE).setEnabled(true);
+                            if (checkedId == R.id.button21) {
+                                currentFoodItem.setSelectedSize("S");
+                            } else if (checkedId == R.id.button22) {
+                                currentFoodItem.setSelectedSize("M");
+                            } else if (checkedId == R.id.button23) {
+                                currentFoodItem.setSelectedSize("L");
+                            } else if (checkedId == R.id.button24) {
+                                currentFoodItem.setSelectedSize("XL");
+                            } else {
+                                currentFoodItem.setSelectedSize(null);
+                                currentDialog.getActionButton(DialogAction.POSITIVE).setEnabled(true);
+                            }
                         }
                     }
-                }
-        );
-        positiveAction = dialog.getActionButton(DialogAction.POSITIVE);
+            );
+        }else{
+            currentFoodItem.setSelectedSize("S");
+            positiveAction.setEnabled(true); // disabled by default
+        }
+
         //noinspection ConstantConditions
-        passwordInput = (EditText) dialog.getCustomView().findViewById(R.id.comments);
-//        passwordInput.addTextChangedListener(new TextWatcher() {
+        commentsInput = (EditText) dialog.getCustomView().findViewById(R.id.comments);
+//        commentsInput.addTextChangedListener(new TextWatcher() {
 //            @Override
 //            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 //            }
@@ -228,11 +231,11 @@ public class FoodCustomAdapter extends BaseAdapter implements ListAdapter {
 
         int widgetColor = ThemeSingleton.get().widgetColor;
 
-        MDTintHelper.setTint(passwordInput,
+        MDTintHelper.setTint(commentsInput,
                 widgetColor == 0 ? ContextCompat.getColor(context, R.color.material_teal_500) : widgetColor);
 
         dialog.show();
-        positiveAction.setEnabled(false); // disabled by default
+
     }
     private Toast mToast;
     private void showToast(String message) {
@@ -248,81 +251,123 @@ public class FoodCustomAdapter extends BaseAdapter implements ListAdapter {
 
         if(currentFoodItem.getOptions() != null)
         {
-            if(currentFoodItem.getOptions().keySet().size()>0)
+            if(currentFoodItem.getOptions().size()>0)
             {
-
+                stepNumber = 0;
+                FoodOption lFirstOption = currentFoodItem.getOptions().get(stepNumber);
+                if(lFirstOption.getType() == FoodOption.MULTI_CHOICES)
+                {
+                    showMultiChioceDialog(lFirstOption);
+                }else if (lFirstOption.getType() == FoodOption.SINGLE_CHOICE)
+                {
+                    showSingleChoiceDialog(lFirstOption);
+                }
             }
         }
-        ArrayList mSelectedItems = new ArrayList();  // Where we track the selected items
+    }
+
+    public void showMultiChioceDialog(FoodOption aInFoodOption)
+    {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        // Multi options Currently not supported in drinks
-        if(currentFoodItem.getOptionsType() == DrinkItem.NO_OPTIONS ||
-                currentFoodItem.getOptionsType() == DrinkItem.MULTI_CHOICES)
-        {
-            showSizesCommentsView();
-        }else if(currentFoodItem.getOptionsType() == DrinkItem.SIGNLE_CHOICE)
-        {
-            builder .setSingleChoiceItems(currentFoodItem.getOptions().toArray(new CharSequence[currentFoodItem.getOptions().size()]),0,
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    String itemSelected = currentFoodItem.getOptions().get(which);
-                                    currentFoodItem.getSelectedOptions().clear();
-                                    currentFoodItem.getSelectedOptions().add(itemSelected);
-                                }
-                            })
-                            // Set the action buttons
-                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int id) {
-                            // User clicked OK, so save the mSelectedItems results somewhere
-                            // or return them to the component that opened the dialog
-                            showSizesCommentsView();
-                        }
-                    })
-                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int id) {
-                            currentFoodItem.getSelectedOptions().clear();
-                        }
-                    });
-            builder.show();
-
-        }
-
+        lTempArrayList.clear();
         // Set the dialog title
 //        builder.setTitle(R.string.pick_toppings)
-        /*builder
                 // Specify the list array, the items to be selected by default (null for none),
                 // and the listener through which to receive callbacks when items are selected
-                .setMultiChoiceItems(currentDrinkItem.getOptions().toArray(new CharSequence[currentDrinkItem.getOptions().size()]), null,
+                builder.setMultiChoiceItems(aInFoodOption.getOptions().toArray(new CharSequence[aInFoodOption.getOptions().size()]), null,
                         new DialogInterface.OnMultiChoiceClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which,
                                                 boolean isChecked) {
-                                String itemChecked = currentDrinkItem.getOptions().get(which);
+                                String itemChecked = currentFoodItem.getOptions().get(stepNumber)
+                                        .getOptions().get(which);
+
                                 if (isChecked) {
                                     // If the user checked the item, add it to the selected items
-                                    currentDrinkItem.getSelectedOptions().add(itemChecked);
-                                } else if (currentDrinkItem.getSelectedOptions().contains(which)) {
+                                    lTempArrayList.add(itemChecked);
+                                } else if (currentFoodItem.getSelectedOptions().contains(which)) {
                                     // Else, if the item is already in the array, remove it
-                                    currentDrinkItem.getSelectedOptions().remove(itemChecked);
+                                    lTempArrayList.remove(itemChecked);
                                 }
                             }
                         })
                         // Set the action buttons
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.submit, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        currentFoodItem.getSelectedOptions().addAll(lTempArrayList);
+                        lTempArrayList.clear();
+                        stepNumber++;
+
+                        if (stepNumber < currentFoodItem.getOptions().size()) {
+                            FoodOption lFirstOption = currentFoodItem.getOptions().get(stepNumber);
+                            if (lFirstOption.getType() == FoodOption.MULTI_CHOICES) {
+                                showMultiChioceDialog(lFirstOption);
+                            } else if (lFirstOption.getType() == FoodOption.SINGLE_CHOICE) {
+                                showSingleChoiceDialog(lFirstOption);
+                            }
+                        } else {
+                            showSizesCommentsView();
+                        }
+                    }
+                })
+                        .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int id) {
+//                        currentFoodItem.getSelectedOptions().clear();
+                                lTempArrayList.clear();
+                                currentFoodItem.reset();                            }
+                        });
+        builder.create().setCanceledOnTouchOutside(false);
+         builder.show();
+    }
+
+    public void showSingleChoiceDialog(FoodOption aInFoodOption)
+    {
+        lTempArrayList.clear();
+        lTempArrayList.add(currentFoodItem.getOptions().get(stepNumber)
+                .getOptions().get(0));//first choice is always selected in single choice dialog
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder .setSingleChoiceItems(aInFoodOption.getOptions().toArray(new CharSequence[currentFoodItem.getOptions().size()]),0,
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        String itemSelected = currentFoodItem.getOptions().get(stepNumber)
+                                .getOptions().get(which);
+                        lTempArrayList.clear();
+                        lTempArrayList.add(itemSelected);
+                    }
+                })
+                // Set the action buttons
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
                         // User clicked OK, so save the mSelectedItems results somewhere
                         // or return them to the component that opened the dialog
+                        currentFoodItem.getSelectedOptions().addAll(lTempArrayList);
+                        lTempArrayList.clear();
+                        stepNumber++;
+
+                        if (stepNumber < currentFoodItem.getOptions().size()) {
+                            FoodOption lFirstOption = currentFoodItem.getOptions().get(stepNumber);
+                            if (lFirstOption.getType() == FoodOption.MULTI_CHOICES) {
+                                showMultiChioceDialog(lFirstOption);
+                            } else if (lFirstOption.getType() == FoodOption.SINGLE_CHOICE) {
+                                showSingleChoiceDialog(lFirstOption);
+                            }
+                        } else {
+                            showSizesCommentsView();
+                        }
                     }
-                 })
+                })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
+                        lTempArrayList.clear();
+                        currentFoodItem.reset();
                     }
                 });
-
-        builder.show();*/
+        builder.create().setCanceledOnTouchOutside(false);
+        builder.show();
     }
 }

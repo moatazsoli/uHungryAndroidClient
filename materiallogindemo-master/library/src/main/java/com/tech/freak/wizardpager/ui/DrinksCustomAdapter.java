@@ -107,6 +107,7 @@ public class DrinksCustomAdapter extends BaseAdapter implements ListAdapter {
                     currentDrinkItem.setQuantity(lQuantity);
                 }
                 DrinksCache.getInstance().removeProduct(currentDrinkItem.getItemName());
+                currentDrinkItem.reset();
                 notifyDataSetChanged();
             }
         });
@@ -167,6 +168,7 @@ public class DrinksCustomAdapter extends BaseAdapter implements ListAdapter {
                                 currentDrinkItem.getSelectedComments()
                         );
                         DrinksCache.getInstance().addProduct(lSelectedDrinkItem.getItemName(),lSelectedDrinkItem);
+                        currentDrinkItem.reset();
                         int lQuantity = currentDrinkItem.getQuantity();
                         lQuantity++;
                         currentDrinkItem.setQuantity(lQuantity);
@@ -176,32 +178,40 @@ public class DrinksCustomAdapter extends BaseAdapter implements ListAdapter {
 
                     @Override
                     public void onNegative(MaterialDialog dialog) {
+                        currentDrinkItem.reset();
                     }
                 }).build();
-
+        dialog.setCanceledOnTouchOutside(false);
         SegmentedGroup segmented2 = (SegmentedGroup) dialog.getCustomView().findViewById(R.id.segmented2);
         currentDialog = dialog;
-        segmented2.setOnCheckedChangeListener(
-                new RadioGroup.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(RadioGroup group, int checkedId) {
-                        currentDialog.getActionButton(DialogAction.POSITIVE).setEnabled(true);
-                        if (checkedId == R.id.button21) {
-                            currentDrinkItem.setSelectedSize("S");
-                        } else if (checkedId == R.id.button22) {
-                            currentDrinkItem.setSelectedSize("M");
-                        } else if (checkedId == R.id.button23) {
-                            currentDrinkItem.setSelectedSize("L");
-                        } else if (checkedId == R.id.button24) {
-                            currentDrinkItem.setSelectedSize("XL");
-                        } else {
-                            currentDrinkItem.setSelectedSize(null);
+        positiveAction = dialog.getActionButton(DialogAction.POSITIVE);
+
+        if(segmented2 != null) {
+            segmented2.setOnCheckedChangeListener(
+                    new RadioGroup.OnCheckedChangeListener() {
+                        @Override
+                        public void onCheckedChanged(RadioGroup group, int checkedId) {
                             currentDialog.getActionButton(DialogAction.POSITIVE).setEnabled(true);
+                            if (checkedId == R.id.button21) {
+                                currentDrinkItem.setSelectedSize("S");
+                            } else if (checkedId == R.id.button22) {
+                                currentDrinkItem.setSelectedSize("M");
+                            } else if (checkedId == R.id.button23) {
+                                currentDrinkItem.setSelectedSize("L");
+                            } else if (checkedId == R.id.button24) {
+                                currentDrinkItem.setSelectedSize("XL");
+                            } else {
+                                currentDrinkItem.setSelectedSize(null);
+                                currentDialog.getActionButton(DialogAction.POSITIVE).setEnabled(true);
+                            }
                         }
                     }
-                }
-        );
-        positiveAction = dialog.getActionButton(DialogAction.POSITIVE);
+            );
+        }else{
+            currentDrinkItem.setSelectedSize("S");
+            positiveAction.setEnabled(true); // disabled by default
+        }
+
         //noinspection ConstantConditions
         passwordInput = (EditText) dialog.getCustomView().findViewById(R.id.comments);
 //        passwordInput.addTextChangedListener(new TextWatcher() {
@@ -248,6 +258,7 @@ public class DrinksCustomAdapter extends BaseAdapter implements ListAdapter {
             showSizesCommentsView();
         }else if(currentDrinkItem.getOptionsType() == DrinkItem.SIGNLE_CHOICE)
         {
+            currentDrinkItem.getSelectedOptions().add(currentDrinkItem.getOptions().get(0));
             builder .setSingleChoiceItems(currentDrinkItem.getOptions().toArray(new CharSequence[currentDrinkItem.getOptions().size()]),0,
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
@@ -269,8 +280,10 @@ public class DrinksCustomAdapter extends BaseAdapter implements ListAdapter {
                         @Override
                         public void onClick(DialogInterface dialog, int id) {
                             currentDrinkItem.getSelectedOptions().clear();
+                            currentDrinkItem.reset();
                         }
                     });
+            builder.create().setCanceledOnTouchOutside(false);
             builder.show();
 
         }

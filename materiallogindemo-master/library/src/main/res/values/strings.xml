@@ -11,9 +11,12 @@
     </string-array>
 
     <string name="drink_size">Select Size</string>
+    <string name="size">Size</string>
     <string name="comments_details">Enter Comments/Details</string>
     <string name="add_drink">Add Drink</string>
+    <string name="add_food">Add Food</string>
     <string name="drink_hint"><font size="12">2 Cream 1 Sugar, Double Double, 3 Milk ..</font></string>
+    <string name="food_hint"><font size="12">E.g. Toasted ? ..</font></string>
 
     <string name="app_name">MaterialDialogs</string>
 
