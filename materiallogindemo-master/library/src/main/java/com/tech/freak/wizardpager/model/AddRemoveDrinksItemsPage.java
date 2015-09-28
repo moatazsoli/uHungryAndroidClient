@@ -90,7 +90,7 @@ public class AddRemoveDrinksItemsPage extends Page {
                     sb.append("--- " + lOption);
                     sb.append("\n");
                 }
-                sb.append(".....................");
+                sb.append("..................................");
                 sb.append("\n");
             }
         }
