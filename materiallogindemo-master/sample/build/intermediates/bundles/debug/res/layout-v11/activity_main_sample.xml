@@ -15,6 +15,12 @@
 
 
 -->
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -71,4 +77,11 @@
     </LinearLayout>
 
 </LinearLayout>
-<!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/src/main/res/layout-v11/activity_main_sample.xml -->
+    <ListView
+        android:id="@+id/navList"
+        android:layout_width="200dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="left|start"
+        android:background="#ffeeeeee"/>
+
+</android.support.v4.widget.DrawerLayout><!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/src/main/res/layout-v11/activity_main_sample.xml -->

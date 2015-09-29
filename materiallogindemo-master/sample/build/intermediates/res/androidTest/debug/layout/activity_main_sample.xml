@@ -16,64 +16,79 @@
 
 
 -->
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:layout_height="match_parent">
 
-    <com.tech.freak.wizardpager.ui.StepPagerStrip
-        android:id="@+id/strip"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:gravity="left"
-        android:paddingBottom="8dp"
-        android:paddingLeft="@dimen/list_item_padding_left"
-        android:paddingRight="@dimen/list_item_padding_right"
-        android:paddingTop="16dp" />
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/pager"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
-
-    <View
-        android:id="@+id/divider"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="?android:attr/listDivider" />
-
-    <LinearLayout
-        style="@style/ButtonBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
-
-        <Button
-            android:id="@+id/prev_button"
-            style="@style/ButtonBarButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/selectable_item_background"
-            android:text="@string/prev" />
-
-        <View
-            android:layout_width="1dp"
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="?android:attr/listDivider" />
+            android:orientation="vertical" >
 
-        <Button
-            android:id="@+id/next_button"
-            style="@style/ButtonBarButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/selectable_item_background"
-            android:text="@string/next" />
-    </LinearLayout>
+            <com.tech.freak.wizardpager.ui.StepPagerStrip
+                android:id="@+id/strip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:gravity="left"
+                android:paddingBottom="8dp"
+                android:paddingLeft="@dimen/list_item_padding_left"
+                android:paddingRight="@dimen/list_item_padding_right"
+                android:paddingTop="16dp" />
 
-</LinearLayout><!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/src/main/res/layout/activity_main_sample.xml --><!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/bundles/debug/res/layout/activity_main_sample.xml -->
+            <android.support.v4.view.ViewPager
+                android:id="@+id/pager"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
+
+            <LinearLayout
+                style="@style/ButtonBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <Button
+                    android:id="@+id/prev_button"
+                    style="@style/ButtonBarButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/selectable_item_background"
+                    android:text="@string/prev" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="?android:attr/listDivider" />
+
+                <Button
+                    android:id="@+id/next_button"
+                    style="@style/ButtonBarButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/selectable_item_background"
+                    android:text="@string/next" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    <ListView
+        android:id="@+id/navList"
+        android:layout_width="200dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="left|start"
+        android:background="#ffeeeeee"/>
+
+</android.support.v4.widget.DrawerLayout><!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/src/main/res/layout/activity_main_sample.xml --><!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/bundles/debug/res/layout/activity_main_sample.xml -->

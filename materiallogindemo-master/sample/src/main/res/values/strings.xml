@@ -20,6 +20,8 @@
     <string name="next">Next</string>
     <string name="prev">Previous</string>
     <string name="finish">Submit order</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
 
     <string name="submit_confirm_message">Place the order with the deli? You will receive an email
         confirmation.</string>

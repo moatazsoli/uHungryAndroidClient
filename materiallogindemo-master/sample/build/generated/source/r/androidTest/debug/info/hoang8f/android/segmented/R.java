@@ -14,12 +14,12 @@ public final class R {
 		public static final int sc_tint_color = 0x7f010069;
 	}
 	public static final class color {
-		public static final int radio_button_selected_color = 0x7f0b003b;
-		public static final int radio_button_unselected_color = 0x7f0b003c;
+		public static final int radio_button_selected_color = 0x7f0b003f;
+		public static final int radio_button_unselected_color = 0x7f0b0040;
 	}
 	public static final class dimen {
-		public static final int radio_button_conner_radius = 0x7f06006f;
-		public static final int radio_button_stroke_border = 0x7f060070;
+		public static final int radio_button_conner_radius = 0x7f060071;
+		public static final int radio_button_stroke_border = 0x7f060072;
 	}
 	public static final class drawable {
 		public static final int button_text_color = 0x7f02003e;
@@ -27,7 +27,7 @@ public final class R {
 		public static final int radio_unchecked = 0x7f020053;
 	}
 	public static final class string {
-		public static final int app_name = 0x7f050013;
+		public static final int app_name = 0x7f050019;
 	}
 	public static final class style {
 		public static final int RadioButton = 0x7f0700b8;

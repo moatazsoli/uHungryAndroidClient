@@ -442,6 +442,12 @@
     <string name="custom_listitem_button">A button!</string>
     <string name="disagree">Disagree</string>
     <string name="dismiss">Dismiss</string>
+    <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/src/main/res/values/strings.xml -->
+    <eat-comment/>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/materiallogindemo-master/library/unspecified/res/values/values.xml -->
+    <eat-comment/>
     <string name="drink_hint"><font size="12">2 Cream 1 Sugar, Double Double, 3 Milk ..</font></string>
     <string name="drink_size">Select Size</string>
     <string name="edittext_pref_desc">This is an example of an EditText preference that automatically uses Material Dialogs to show the input dialog.</string>
