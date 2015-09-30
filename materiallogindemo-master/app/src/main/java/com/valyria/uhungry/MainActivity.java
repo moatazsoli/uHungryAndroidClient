@@ -7,21 +7,22 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.parse.Parse;
-import com.parse.ParseInstallation;
-import com.parse.PushService;
+import com.android.volley.RequestQueue;
+import com.example.android.wizardpager.HttpSingleton;
 
 
 public class MainActivity extends AppCompatActivity {
 
     private  final static int LOGIN_ACITIVITY_CODE = 0x12;
-    private final static boolean DEBUG = true;
+    private final static boolean DEBUG = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Parse.initialize(this, "dDEIBkzplVgMdT8CY4JWQLJrUGlFZUyKRtLsLJgC", "nYu5mIT3HDW34URw1FEk3ED9iWwkXWjALBk4x1yh");
-        ParseInstallation.getCurrentInstallation().saveInBackground();
+//        Parse.initialize(this, "dDEIBkzplVgMdT8CY4JWQLJrUGlFZUyKRtLsLJgC", "nYu5mIT3HDW34URw1FEk3ED9iWwkXWjALBk4x1yh");
+//        ParseInstallation.getCurrentInstallation().saveInBackground();
+        RequestQueue queue = HttpSingleton.getInstance(this.getApplicationContext()).
+                getRequestQueue();
 
         if(DEBUG)
         {
@@ -30,7 +31,9 @@ public class MainActivity extends AppCompatActivity {
             finish();
         }else {
             Intent intent = new Intent(this, LoginActivity.class);
-            startActivityForResult(intent, LOGIN_ACITIVITY_CODE);
+            startActivity(intent);
+            finish();
+//            startActivityForResult(intent, LOGIN_ACITIVITY_CODE);
         }
     }
 

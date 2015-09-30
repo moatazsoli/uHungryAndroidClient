@@ -18,23 +18,22 @@ package com.example.android.wizardpager;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
-import android.graphics.Paint;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.util.TypedValue;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,6 +43,15 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.braintreepayments.api.dropin.BraintreePaymentActivity;
+import com.paypal.android.sdk.payments.LoginActivity;
 import com.tech.freak.wizardpager.model.AbstractWizardModel;
 import com.tech.freak.wizardpager.model.ModelCallbacks;
 import com.tech.freak.wizardpager.model.Page;
@@ -51,21 +59,24 @@ import com.tech.freak.wizardpager.ui.PageFragmentCallbacks;
 import com.tech.freak.wizardpager.ui.ReviewFragment;
 import com.tech.freak.wizardpager.ui.StepPagerStrip;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements
         PageFragmentCallbacks, ReviewFragment.Callbacks, ModelCallbacks {
+
+    private static final int REQUEST_DROPINUI = 100;
 
     private ListView mDrawerList;
     private DrawerLayout mDrawerLayout;
     private ArrayAdapter<String> mAdapter;
     private ActionBarDrawerToggle mDrawerToggle;
     private String mActivityTitle;
-
-
+    private String username;
     private ViewPager mPager;
     private MyPagerAdapter mPagerAdapter;
-
+    private ProgressDialog mProgressDialog;
     private boolean mEditingAfterReview;
 
     private AbstractWizardModel mWizardModel = new SandwichWizardModel(this);
@@ -157,6 +168,13 @@ public class MainActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_sample);
 
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        username = prefs.getString("username", "");
+
+        mProgressDialog = new ProgressDialog(MainActivity.this,
+                R.style.AppTheme);
+        mProgressDialog.setIndeterminate(true);
+
 
         mDrawerList = (ListView)findViewById(R.id.navList);mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         mActivityTitle = getTitle().toString();
@@ -223,9 +241,49 @@ public class MainActivity extends AppCompatActivity implements
                                     .setMessage(R.string.submit_confirm_message)
                                     .setPositiveButton(
                                             R.string.submit_confirm_button,
-                                            null)
+                                            new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int whichButton) {
+                                                    //To check if the user has a method of payment
+                                                    String uri = String.format("https://uhungry-valyriacorp.c9.io/customers/getpaymentmethod/?username=%1$s",
+                                                            username);
+                                                    StringRequest stringRequest = new StringRequest(Request.Method.GET, uri,
+                                                            new Response.Listener<String>() {
+                                                                @Override
+                                                                public void onResponse(String response) {
+                                                                    if(response.equals("8000"))
+                                                                    {
+                                                                        Toast.makeText(MainActivity.this, "Placing your Order", Toast.LENGTH_SHORT).show();
+                                                                        mProgressDialog.setMessage("Placing Order...");
+                                                                        mProgressDialog.show();
+                                                                        placeOrder();
+                                                                    }else if(response.equals("8001"))
+                                                                    {
+                                                                        Toast.makeText(MainActivity.this, "No Payment Method Available. Please add one.", Toast.LENGTH_SHORT).show();
+                                                                        setupDropInUi();
+                                                                    }else{
+                                                                        Toast.makeText(MainActivity.this, response, Toast.LENGTH_SHORT).show();
+                                                                    }
+                                                                }
+                                                            },
+                                                            new Response.ErrorListener() {
+                                                                @Override
+                                                                public void onErrorResponse(VolleyError error) {
+                                                                    // Handle error
+                                                                    Toast.makeText(getBaseContext(), error.toString(), Toast.LENGTH_LONG).show();
+                                                                }
+                                                            });
+                                                    // Add the request to the RequestQueue.
+                                                    HttpSingleton.getInstance(MainActivity.this).addToRequestQueue(stringRequest);
+                                                }
+                                            }
+                                    )
                                     .setNegativeButton(android.R.string.cancel,
-                                            null).create();
+                                            new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int whichButton) {
+                                                    Toast.makeText(MainActivity.this, "Order cancelled", Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
+                                    ).create();
                         }
                     };
                     dg.show(getSupportFragmentManager(), "place_order_dialog");
@@ -250,6 +308,123 @@ public class MainActivity extends AppCompatActivity implements
         updateBottomBar();
     }
 
+
+    private void setupDropInUi(){
+        String uri = String.format("https://uhungry-valyriacorp.c9.io/payment/client_token/?username=%1$s",
+                username);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, uri,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        if(response.equals("0001"))
+                        {
+                            Toast.makeText(MainActivity.this, "User Not Found!", Toast.LENGTH_SHORT).show();
+                        }else{
+                            String client_token = response;
+                            Intent intent = new Intent(MainActivity.this, BraintreePaymentActivity.class);
+                            intent.putExtra(BraintreePaymentActivity.EXTRA_CLIENT_TOKEN, client_token);
+                            startActivityForResult(intent, REQUEST_DROPINUI);
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Handle error
+                        Toast.makeText(getBaseContext(), error.toString(), Toast.LENGTH_LONG).show();
+                    }
+                });
+        // Add the request to the RequestQueue.
+        HttpSingleton.getInstance(MainActivity.this).addToRequestQueue(stringRequest);
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_DROPINUI) {
+            switch (resultCode) {
+                case BraintreePaymentActivity.RESULT_OK:
+                    String paymentMethodNonce = data
+                            .getStringExtra(BraintreePaymentActivity.EXTRA_PAYMENT_METHOD_NONCE);
+                    addPaymentMethod(paymentMethodNonce);
+                    break;
+                case BraintreePaymentActivity.BRAINTREE_RESULT_DEVELOPER_ERROR:
+                case BraintreePaymentActivity.BRAINTREE_RESULT_SERVER_ERROR:
+                case BraintreePaymentActivity.BRAINTREE_RESULT_SERVER_UNAVAILABLE:
+                    // handle errors here, a throwable may be available in
+                    Throwable lThrowable = (Throwable) data.getSerializableExtra(BraintreePaymentActivity.EXTRA_ERROR_MESSAGE);
+                    if(lThrowable != null) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                        builder.setMessage(lThrowable.getMessage())
+                                .setTitle("Error")
+                                .setCancelable(false)
+                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        //do nothing
+                                        // MAYBE CLOSE THE APP OR REPORT PROBLEM TO uHungry.
+                                    }
+                                });
+                        AlertDialog alert = builder.create();
+                        alert.show();
+                    }
+
+                    break;
+                default:
+                    break;
+            }
+
+        }
+    }
+
+    private void addPaymentMethod(final String aInPaymentMethodNonce)
+    {
+        final ProgressDialog PaymentMethodProgressDialog = new ProgressDialog(MainActivity.this,
+                R.style.AppTheme);
+        PaymentMethodProgressDialog.setIndeterminate(true);
+        PaymentMethodProgressDialog.setMessage("Adding payment method to your profile ...");
+        PaymentMethodProgressDialog.show();
+
+        final StringRequest stringRequest = new StringRequest(Request.Method.POST,"https://uhungry-valyriacorp.c9.io/customers/addpaymentmethod/", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                PaymentMethodProgressDialog.dismiss();
+                if(response.equals("6000"))
+                {
+                    //adding payment method successfull
+                    Toast.makeText(getBaseContext(), "Payment Method has been added to your profile", Toast.LENGTH_LONG).show();
+                    mProgressDialog.setMessage("Placing Order...");
+                    mProgressDialog.show();
+                    placeOrder();
+
+                }else
+                {
+                    Toast.makeText(getBaseContext(), response, Toast.LENGTH_LONG).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                PaymentMethodProgressDialog.dismiss();
+                Toast.makeText(getBaseContext(), error.toString(), Toast.LENGTH_LONG).show();
+            }
+        }){
+            @Override
+            protected Map<String,String> getParams(){
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("username",username);
+                params.put("nonce_from_the_client",aInPaymentMethodNonce);
+
+                return params;
+            }
+        };
+        // Add the request to the RequestQueue.
+        HttpSingleton.getInstance(this).addToRequestQueue(stringRequest);
+    }
+
+    public void placeOrder()
+    {
+        //Implement placing order post request
+    }
     public void onBackPressed() {
         if(mPager.getCurrentItem() == 0)
         {

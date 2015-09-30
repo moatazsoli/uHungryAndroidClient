@@ -1,7 +1,9 @@
 package com.valyria.uhungry;
 
 import android.app.ProgressDialog;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
@@ -13,11 +15,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
+import com.example.android.wizardpager.HttpSingleton;
+import com.example.android.wizardpager.MainActivity;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -74,42 +79,82 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog.setMessage("Authenticating...");
         progressDialog.show();
 
-        String email = _emailText.getText().toString();
-        String password = _passwordText.getText().toString();
+        final String email = _emailText.getText().toString();
+        final String password = _passwordText.getText().toString();
 
         // TODO: Implement your own authentication logic here.
 
-        new android.os.Handler().postDelayed(
-                new Runnable() {
-                    public void run() {
-                        // On complete call either onLoginSuccess or onLoginFailed
-                        onLoginSuccess();
-                        // onLoginFailed();
-                        progressDialog.dismiss();
+        final StringRequest stringRequest = new StringRequest(Request.Method.POST,"https://uhungry-valyriacorp.c9.io/customers/signin/", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                progressDialog.dismiss();
+                if(response.equals("3000"))
+                {
+                    onLoginSuccess();
+                    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                    prefs.edit().putString("username", email).commit(); // email is a string
+                }else{
+                    if(response.equals("3001"))
+                    {
+                        onLoginFailed();
+                        Toast.makeText(getBaseContext(), "Please activate your account", Toast.LENGTH_LONG).show();
+                    }else if(response.equals("3003"))
+                    {
+                        onLoginFailed();
+                        Toast.makeText(getBaseContext(), "This username is not registered", Toast.LENGTH_LONG).show();
                     }
-                }, 3000);
-
-
-        RequestQueue queue = Volley.newRequestQueue(this);
-        String url ="http://www.google.com";
-
-    // Request a string response from the provided URL.
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    
-                    @Override
-                    public void onResponse(String response) {
-                        // Display the first 500 characters of the response string.
-                        mTextView.setText("Response is: "+ response.substring(0,500));
-                    }
-                }, new Response.ErrorListener() {
+                }
+            }
+        }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                mTextView.setText("That didn't work!");
+                progressDialog.dismiss();
+                Toast.makeText(getBaseContext(), error.toString(), Toast.LENGTH_LONG).show();
             }
-        });
-// Add the request to the RequestQueue.
-        queue.add(stringRequest);
+        }){
+            @Override
+            protected Map<String,String> getParams(){
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("username",email);
+                params.put("password", password);
+                return params;
+            }
+        };
+
+
+        // Add the request to the RequestQueue.
+        HttpSingleton.getInstance(this).addToRequestQueue(stringRequest);
+//        new android.os.Handler().postDelayed(
+//                new Runnable() {
+//                    public void run() {
+//                        // On complete call either onLoginSuccess or onLoginFailed
+//                        onLoginSuccess();
+//                        // onLoginFailed();
+//                        progressDialog.dismiss();
+//                    }
+//                }, 3000);
+
+
+//        RequestQueue queue = Volley.newRequestQueue(this);
+//        String url ="http://www.google.com";
+//
+//        // Request a string response from the provided URL.
+//        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+//                new Response.Listener<String>() {
+//
+//                    @Override
+//                    public void onResponse(String response) {
+//                        // Display the first 500 characters of the response string.
+//        //                        mTextView.setText("Response is: "+ response.substring(0,500));
+//                    }
+//                }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//        //                mTextView.setText("That didn't work!");
+//            }
+//        });
+//        // Add the request to the RequestQueue.
+//        HttpSingleton.getInstance(this).addToRequestQueue(stringRequest);
     }
 
 
@@ -133,9 +178,16 @@ public class LoginActivity extends AppCompatActivity {
 
     public void onLoginSuccess() {
         _loginButton.setEnabled(true);
-        Intent intent = getIntent();
-        setResult(RESULT_OK, intent);
+
+        Toast.makeText(getBaseContext(), "Login successful", Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(this, com.example.android.wizardpager.MainActivity.class);
+        startActivity(intent);
         finish();
+
+
+//        Intent intent = getIntent();
+//        setResult(RESULT_OK, intent);
+//        finish();
     }
 
     public void onLoginFailed() {

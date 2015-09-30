@@ -21,4 +21,16 @@
         <item name="android:textColor">#ff0099cc</item>
         <item name="android:fontFamily">sans-serif-thin</item>
     </style>
+    <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/com.braintreepayments/card-form/2.0.1/res/values-v16/values-v16.xml -->
+    <eat-comment/>
+    <style name="bt_base_textview">
+        <item name="android:textSize">@dimen/bt_input_text_size</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+    </style>
+    <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/com.braintreepayments.api/braintree/1.6.5/res/values-v16/values-v16.xml -->
+    <eat-comment/>
+    <style name="bt_base_textview_bold">
+        <item name="android:textSize">@dimen/bt_default_text_size</item>
+        <item name="android:fontFamily">sans-serif-condensed</item>
+    </style>
 </resources>
