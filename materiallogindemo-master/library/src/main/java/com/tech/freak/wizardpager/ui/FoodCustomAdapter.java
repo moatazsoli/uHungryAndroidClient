@@ -158,10 +158,17 @@ public class FoodCustomAdapter extends BaseAdapter implements ListAdapter {
                     public void onPositive(MaterialDialog dialog) {
                         EditText lComments = (EditText) dialog.getCustomView().findViewById(R.id.comments);
                         currentFoodItem.setSelectedComments(lComments.getText().toString());
+                        String selectedSize;
+                        if(currentFoodItem.isSizesAvailable())
+                        {
+                            selectedSize = currentFoodItem.getSelectedSize();
+                        }else{
+                            selectedSize = null;
+                        }
                         SelectedFoodItem lSelectedFoodItem = new SelectedFoodItem(
                                 currentFoodItem.getItemName(),
                                 currentFoodItem.getSizesPrices().get(currentFoodItem.getSelectedSize()),
-                                currentFoodItem.getSelectedSize(),
+                                selectedSize,
                                 currentFoodItem.getSelectedOptions(),
                                 currentFoodItem.getSelectedComments()
                         );

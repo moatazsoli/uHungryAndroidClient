@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/src/main/res/values/color.xml -->
+    <eat-comment/>
+    <color name="accent">#FFFFFF</color>
+    <color name="aluminum">#999999</color>
+    <color name="base">#AAAAAA</color>
+    <color name="black">#000000</color>
+    <color name="iron">#CCCCCC</color>
+    <color name="jet">#222222</color>
+    <color name="jumbo">#888888</color>
+    <color name="monsoon">#777777</color>
+    <color name="oil">#333333</color>
+    <color name="primary">#E43F3F</color>
+    <color name="primary_dark">#E12929</color>
+    <color name="primary_darker">#CC1D1D</color>
+    <color name="white">#FFFFFF</color>
     <declare-styleable name="AppThemeSample"><attr format="reference" name="textAppearanceFinish"/></declare-styleable>
     <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/src/main/res/values/dimens.xml -->
     <eat-comment/>
@@ -27,6 +42,8 @@
     <eat-comment/>
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="textAppearanceFinish">@style/TextAppearanceFinish</item>
+    </style>
+    <style name="AppTheme.Light.Dialog" parent="Theme.AppCompat.Dialog">
     </style>
     <style name="ButtonBar" parent="@android:style/ButtonBar">
         <item name="android:background">@android:color/transparent</item>

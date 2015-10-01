@@ -30,6 +30,7 @@ import butterknife.InjectView;
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
+    private static final int REQUEST_MAINAPP = 10;
 
     @InjectView(R.id.input_email) EditText _emailText;
     @InjectView(R.id.input_password) EditText _passwordText;
@@ -162,9 +163,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_SIGNUP) {
             if (resultCode == RESULT_OK) {
-
-                // TODO: Implement successful signup logic here
-                // By default we just finish the Activity and log them in automatically
+                setResult(RESULT_OK);
                 this.finish();
             }
         }
@@ -179,9 +178,10 @@ public class LoginActivity extends AppCompatActivity {
     public void onLoginSuccess() {
         _loginButton.setEnabled(true);
 
-        Toast.makeText(getBaseContext(), "Login successful", Toast.LENGTH_LONG).show();
-        Intent intent = new Intent(this, com.example.android.wizardpager.MainActivity.class);
-        startActivity(intent);
+//        Toast.makeText(getBaseContext(), "Login successful", Toast.LENGTH_LONG).show();
+//        Intent intent = new Intent(this, com.example.android.wizardpager.MainActivity.class);
+//        startActivity(intent);
+        setResult(RESULT_OK);
         finish();
 
 

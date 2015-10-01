@@ -27,6 +27,9 @@
         <item name="textAppearanceFinish">@style/TextAppearanceFinish</item>
     </style>
 
+    <style name="AppTheme.Light.Dialog" parent="Theme.AppCompat.Dialog">
+    </style>
+
     <style name="TextAppearanceFinish">
         <item name="android:textColor">#fff</item>
     </style>

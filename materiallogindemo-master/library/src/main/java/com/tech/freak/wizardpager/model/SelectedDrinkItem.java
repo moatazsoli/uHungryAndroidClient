@@ -14,6 +14,7 @@ public class SelectedDrinkItem implements SelectedProduct{
     private ArrayList<String> selectedOptions;
     private String selectedComments;
 
+
     public SelectedDrinkItem(String itemName, Double price, String selectedSize, ArrayList<String> selectedOptions, String selectedComments) {
         this.itemName = itemName;
         this.price = price;

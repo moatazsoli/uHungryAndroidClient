@@ -83,11 +83,20 @@ public class AddRemoveFoodItemsPage extends Page {
             ArrayList<SelectedFoodItem> lFoodItems = lSelectedFoodProducts.get(lProduct);
             for(SelectedFoodItem lSelectedFood:lFoodItems)
             {
-                sb.append("$" + lSelectedFood.getPrice() + " - " + lSelectedFood.getItemName());
+                if(lSelectedFood.getSelectedSize() == null)
+                {
+                    sb.append("$" + lSelectedFood.getPrice() + " - " + lSelectedFood.getItemName());
+                }else{
+                    sb.append("$" + lSelectedFood.getPrice() + " - " + lSelectedFood.getItemName()+"("+lSelectedFood.getSelectedSize() +")");
+                }
                 sb.append("\n");
                 for(String lOption: lSelectedFood.getSelectedOptions())
                 {
                     sb.append("--- " + lOption);
+                    sb.append("\n");
+                }
+                if(lSelectedFood!= null && !lSelectedFood.getSelectedComments().equals("")) {
+                    sb.append(lSelectedFood.getSelectedComments());
                     sb.append("\n");
                 }
                 sb.append("..................................");

@@ -84,6 +84,12 @@ public class BranchPage extends SingleFixedChoicePage {
                 lPages.add(new AddRemoveDrinksItemsPage(callbacks, key).setChoices(lProducts.get(key)));
             }
         }
+        lPages.add(new SingleFixedChoicePage(callbacks, "Delivery Location").setChoices(
+                "Library", "Architecture Building", "Azrieli Pavilion", "Canal Building",
+                "Dunton Tower", "Kailash Metal Theatre", "Paterson Hall", "Southam Hall",
+                "Loeb Building", "Steacie Building", "Mackenzie Building", "Minto Center",
+                "Tory Building", "University Center", "Herzberg Labs").setRequired(true));
+
         PageList childPageList = new PageList(lPages);
         for (Page page : childPageList) {
             page.setParentKey(aInRestaurent.getName());

@@ -83,11 +83,20 @@ public class AddRemoveDrinksItemsPage extends Page {
             ArrayList<SelectedDrinkItem> lDrinkItems = lSelectedDrinkProducts.get(lProduct);
             for(SelectedDrinkItem lSelectedDrink:lDrinkItems)
             {
-                sb.append("$" + lSelectedDrink.getPrice() + " - " + lSelectedDrink.getItemName());
+                if(lSelectedDrink.getSelectedSize() == null)
+                {
+                    sb.append("$" + lSelectedDrink.getPrice() + " - " + lSelectedDrink.getItemName());
+                }else{
+                    sb.append("$" + lSelectedDrink.getPrice() + " - " + lSelectedDrink.getItemName()+"("+lSelectedDrink.getSelectedSize()+")");
+                }
                 sb.append("\n");
                 for(String lOption: lSelectedDrink.getSelectedOptions())
                 {
                     sb.append("--- " + lOption);
+                    sb.append("\n");
+                }
+                if(lSelectedDrink!= null && !lSelectedDrink.getSelectedComments().equals("")) {
+                    sb.append(lSelectedDrink.getSelectedComments());
                     sb.append("\n");
                 }
                 sb.append("..................................");

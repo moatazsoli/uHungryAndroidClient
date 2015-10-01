@@ -51,14 +51,21 @@ import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.braintreepayments.api.dropin.BraintreePaymentActivity;
-import com.paypal.android.sdk.payments.LoginActivity;
 import com.tech.freak.wizardpager.model.AbstractWizardModel;
+import com.tech.freak.wizardpager.model.DrinksCache;
+import com.tech.freak.wizardpager.model.FoodCache;
 import com.tech.freak.wizardpager.model.ModelCallbacks;
+import com.tech.freak.wizardpager.model.OrderCache;
 import com.tech.freak.wizardpager.model.Page;
+import com.tech.freak.wizardpager.model.ReviewItem;
+import com.tech.freak.wizardpager.model.SelectedDrinkItem;
+import com.tech.freak.wizardpager.model.SelectedFoodItem;
 import com.tech.freak.wizardpager.ui.PageFragmentCallbacks;
 import com.tech.freak.wizardpager.ui.ReviewFragment;
 import com.tech.freak.wizardpager.ui.StepPagerStrip;
 
+import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -68,6 +75,7 @@ public class MainActivity extends AppCompatActivity implements
 
     private static final int REQUEST_DROPINUI = 100;
 
+    private ReviewFragment reviewFragment;
     private ListView mDrawerList;
     private DrawerLayout mDrawerLayout;
     private ArrayAdapter<String> mAdapter;
@@ -78,6 +86,8 @@ public class MainActivity extends AppCompatActivity implements
     private MyPagerAdapter mPagerAdapter;
     private ProgressDialog mProgressDialog;
     private boolean mEditingAfterReview;
+    private String lCurrentOrder;
+    private Double lTotalPrice;
 
     private AbstractWizardModel mWizardModel = new SandwichWizardModel(this);
 
@@ -90,14 +100,30 @@ public class MainActivity extends AppCompatActivity implements
     private StepPagerStrip mStepPagerStrip;
 
     private void addDrawerItems() {
-        String[] osArray = { "Android", "iOS", "Windows", "OS X", "Linux" };
+        final String[] osArray = { "My Orders", "History", "Payment", "Settings", "Terms of Condition", "Privacy Policy",
+        "Signout"};
         mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
         mDrawerList.setAdapter(mAdapter);
 
         mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(MainActivity.this, "Time for an upgrade!", Toast.LENGTH_SHORT).show();
+                String lCurrentListItem = osArray[position];
+                if(lCurrentListItem != null)
+                {
+                    if(lCurrentListItem.equals("Signout"))
+                    {
+                        SharedPreferences mySPrefs =PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                        SharedPreferences.Editor editor = mySPrefs.edit();
+                        editor.remove("username");
+                        editor.apply();
+                        setResult(RESULT_OK);
+                        finish();
+
+                    }else{
+                        Toast.makeText(MainActivity.this, "Time for an upgrade!", Toast.LENGTH_SHORT).show();
+                    }
+                }
             }
         });
     }
@@ -171,8 +197,7 @@ public class MainActivity extends AppCompatActivity implements
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         username = prefs.getString("username", "");
 
-        mProgressDialog = new ProgressDialog(MainActivity.this,
-                R.style.AppTheme);
+        mProgressDialog = new ProgressDialog(MainActivity.this);
         mProgressDialog.setIndeterminate(true);
 
 
@@ -243,6 +268,8 @@ public class MainActivity extends AppCompatActivity implements
                                             R.string.submit_confirm_button,
                                             new DialogInterface.OnClickListener() {
                                                 public void onClick(DialogInterface dialog, int whichButton) {
+
+                                                    placeOrder();
                                                     //To check if the user has a method of payment
                                                     String uri = String.format("https://uhungry-valyriacorp.c9.io/customers/getpaymentmethod/?username=%1$s",
                                                             username);
@@ -253,8 +280,6 @@ public class MainActivity extends AppCompatActivity implements
                                                                     if(response.equals("8000"))
                                                                     {
                                                                         Toast.makeText(MainActivity.this, "Placing your Order", Toast.LENGTH_SHORT).show();
-                                                                        mProgressDialog.setMessage("Placing Order...");
-                                                                        mProgressDialog.show();
                                                                         placeOrder();
                                                                     }else if(response.equals("8001"))
                                                                     {
@@ -379,7 +404,7 @@ public class MainActivity extends AppCompatActivity implements
     private void addPaymentMethod(final String aInPaymentMethodNonce)
     {
         final ProgressDialog PaymentMethodProgressDialog = new ProgressDialog(MainActivity.this,
-                R.style.AppTheme);
+                R.style.AppTheme_Light_Dialog);
         PaymentMethodProgressDialog.setIndeterminate(true);
         PaymentMethodProgressDialog.setMessage("Adding payment method to your profile ...");
         PaymentMethodProgressDialog.show();
@@ -423,7 +448,91 @@ public class MainActivity extends AppCompatActivity implements
 
     public void placeOrder()
     {
-        //Implement placing order post request
+        mProgressDialog.setMessage("Placing Order...");
+        mProgressDialog.show();
+        lCurrentOrder = "";
+        for(ReviewItem lItem: reviewFragment.getReviewItems())
+        {
+            lCurrentOrder = lCurrentOrder + lItem.getDisplayValue();
+            lCurrentOrder = lCurrentOrder +"\n";
+        }
+
+
+        lTotalPrice = 0.0;
+        HashMap<String,ArrayList<SelectedFoodItem>> lSelectedFoodProducts =
+                FoodCache.getInstance().getSelectedProducts();
+
+        for(String lProduct: lSelectedFoodProducts.keySet())
+        {
+            ArrayList<SelectedFoodItem> lFoodItems = lSelectedFoodProducts.get(lProduct);
+            for (SelectedFoodItem lSelectedFood : lFoodItems)
+            {
+                lTotalPrice = lTotalPrice + lSelectedFood.getPrice();
+            }
+        }
+        HashMap<String,ArrayList<SelectedDrinkItem>> lSelectedDrinkProducts =
+                DrinksCache.getInstance().getSelectedProducts();
+
+        for(String lProduct: lSelectedDrinkProducts.keySet())
+        {
+            ArrayList<SelectedDrinkItem> lDrinkItems = lSelectedDrinkProducts.get(lProduct);
+            for (SelectedDrinkItem lSelectedDrink : lDrinkItems)
+            {
+                lTotalPrice = lTotalPrice + lSelectedDrink.getPrice();
+            }
+        }
+
+        // taxes and delivery fare.
+        if(lTotalPrice > 0 && lTotalPrice < 10)
+        {
+            lTotalPrice = lTotalPrice + 2;
+        }
+        if(lTotalPrice > 10)
+        {
+            lTotalPrice = lTotalPrice + 4;
+        }
+        lTotalPrice = lTotalPrice * 1.13;
+
+        final StringRequest stringRequest = new StringRequest(Request.Method.POST,"https://uhungry-valyriacorp.c9.io/customers/signin/", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                mProgressDialog.dismiss();
+                if(response.equals("5000"))
+                {
+                    Toast.makeText(getBaseContext(), "Success! Sit tight while we bring you your order!", Toast.LENGTH_LONG).show();
+                }else{
+                    if(response.equals("5001"))
+                    {
+                        Toast.makeText(getBaseContext(), "User not registered", Toast.LENGTH_LONG).show();
+                    }else
+                    {
+                        Toast.makeText(getBaseContext(), response, Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                mProgressDialog.dismiss();
+                Toast.makeText(getBaseContext(), error.toString(), Toast.LENGTH_LONG).show();
+            }
+        }){
+            @Override
+            protected Map<String,String> getParams(){
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("username",username);
+                params.put("location", OrderCache.getInstance().getSelectedLocation());
+                params.put("orderdetails", lCurrentOrder);
+                DecimalFormat df = new DecimalFormat("#.00");
+                params.put("totalprice", df.format(lTotalPrice));
+                return params;
+            }
+        };
+
+
+        // Add the request to the RequestQueue.
+        HttpSingleton.getInstance(this).addToRequestQueue(stringRequest);
+
     }
     public void onBackPressed() {
         if(mPager.getCurrentItem() == 0)
@@ -542,7 +651,8 @@ public class MainActivity extends AppCompatActivity implements
         @Override
         public Fragment getItem(int i) {
             if (i >= mCurrentPageSequence.size()) {
-                return new ReviewFragment();
+                reviewFragment = new ReviewFragment();
+                return reviewFragment;
             }
 
             return mCurrentPageSequence.get(i).createFragment();

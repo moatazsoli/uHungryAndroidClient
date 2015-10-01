@@ -160,10 +160,17 @@ public class DrinksCustomAdapter extends BaseAdapter implements ListAdapter {
                     public void onPositive(MaterialDialog dialog) {
                         EditText lComments = (EditText) dialog.getCustomView().findViewById(R.id.comments);
                         currentDrinkItem.setSelectedComments(lComments.getText().toString());
+                        String selectedSize;
+                        if(currentDrinkItem.isSizesAvailable())
+                        {
+                            selectedSize = currentDrinkItem.getSelectedSize();
+                        }else{
+                            selectedSize = null;
+                        }
                         SelectedDrinkItem lSelectedDrinkItem = new SelectedDrinkItem(
                                 currentDrinkItem.getItemName(),
                                 currentDrinkItem.getSizesPrices().get(currentDrinkItem.getSelectedSize()),
-                                currentDrinkItem.getSelectedSize(),
+                                selectedSize,
                                 currentDrinkItem.getSelectedOptions(),
                                 currentDrinkItem.getSelectedComments()
                         );

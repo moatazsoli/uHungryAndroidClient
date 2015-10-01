@@ -22,7 +22,9 @@ import java.util.Comparator;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.ListFragment;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -34,6 +36,7 @@ import android.widget.TextView;
 import com.tech.freak.wizardpager.R;
 import com.tech.freak.wizardpager.model.AbstractWizardModel;
 import com.tech.freak.wizardpager.model.ModelCallbacks;
+import com.tech.freak.wizardpager.model.OrderCache;
 import com.tech.freak.wizardpager.model.Page;
 import com.tech.freak.wizardpager.model.ReviewItem;
 
@@ -51,6 +54,11 @@ public class ReviewFragment extends ListFragment implements ModelCallbacks {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mReviewAdapter = new ReviewAdapter();
+    }
+
+    public List<ReviewItem> getReviewItems()
+    {
+        return mCurrentReviewItems;
     }
 
     @Override
@@ -168,6 +176,10 @@ public class ReviewFragment extends ListFragment implements ModelCallbacks {
             }
             ((TextView) rootView.findViewById(android.R.id.text1)).setText(reviewItem.getTitle());
             ((TextView) rootView.findViewById(android.R.id.text2)).setText(value);
+            if(reviewItem.getTitle().equals("Delivery Location"))
+            {
+                OrderCache.getInstance().setSelectedLocation(value);
+            }
             return rootView;
         }
 

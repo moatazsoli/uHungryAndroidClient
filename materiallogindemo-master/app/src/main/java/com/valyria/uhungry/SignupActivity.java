@@ -94,11 +94,6 @@ public class SignupActivity extends AppCompatActivity {
                     SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                     prefs.edit().putString("username", email).commit(); // email is a string
 
-                    //LOGOUT
-//                    SharedPreferences mySPrefs =PreferenceManager.getDefaultSharedPreferences(this);
-//                    SharedPreferences.Editor editor = mySPrefs.edit();
-//                    editor.remove(String key);
-//                    editor.apply();
                     //
                 }else if(response.equals("2001"))
                 {
@@ -165,12 +160,9 @@ public class SignupActivity extends AppCompatActivity {
 
     public void onSignupSuccess() {
         _signupButton.setEnabled(true);
-
-        Intent intent = new Intent(this, com.example.android.wizardpager.MainActivity.class);
-        startActivity(intent);
+        setResult(RESULT_OK, null);
         finish();
 
-//        setResult(RESULT_OK, null);
 //        finish();
     }
 

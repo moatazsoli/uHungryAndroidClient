@@ -21,12 +21,7 @@ public class DrinkItem implements Products{
     private ArrayList<String> options;
     private ArrayList<String> selectedOptions;
     private String selectedComments;
-
-//
-//    public DrinkItem(String aInItemName, int aInSizes) {
-//        itemName = aInItemName;
-//        sizes = aInSizes;
-//    }
+    private Boolean sizesAvailable;
 
     public DrinkItem(String aInItemName, HashMap<String,Double> aInSizesPrices,
                      int aInOptionsType, ArrayList<String> aInOptions) {
@@ -37,8 +32,21 @@ public class DrinkItem implements Products{
         sizes = aInSizesPrices.size();
         selectedOptions = new ArrayList<String>();
         quantity = 0;
+        if(sizes > 1)
+        {
+            sizesAvailable = true;
+        }else{
+            sizesAvailable = false;
+        }
     }
 
+    public Boolean isSizesAvailable() {
+        return sizesAvailable;
+    }
+
+    public void setSizesAvailable(Boolean sizesAvailable) {
+        this.sizesAvailable = sizesAvailable;
+    }
 
     public String getReviewString()
     {

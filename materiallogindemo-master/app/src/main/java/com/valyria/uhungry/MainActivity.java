@@ -1,7 +1,9 @@
 package com.valyria.uhungry;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,6 +16,7 @@ import com.example.android.wizardpager.HttpSingleton;
 public class MainActivity extends AppCompatActivity {
 
     private  final static int LOGIN_ACITIVITY_CODE = 0x12;
+    private  final static int REQUEST_MAINAPP_CODE = 0x13;
     private final static boolean DEBUG = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,11 +31,17 @@ public class MainActivity extends AppCompatActivity {
         {
             Intent intent = new Intent(this, com.example.android.wizardpager.MainActivity.class);
             startActivity(intent);
-            finish();
         }else {
-            Intent intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);
-            finish();
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+            String username = prefs.getString("username", "");
+            if(!username.equals(""))
+            {
+                Intent intent = new Intent(this, com.example.android.wizardpager.MainActivity.class);
+                startActivityForResult(intent, REQUEST_MAINAPP_CODE);
+            }else {
+                Intent intent = new Intent(this, LoginActivity.class);
+                startActivityForResult(intent, LOGIN_ACITIVITY_CODE);
+            }
 //            startActivityForResult(intent, LOGIN_ACITIVITY_CODE);
         }
     }
@@ -66,11 +75,16 @@ public class MainActivity extends AppCompatActivity {
             if(resultCode == RESULT_OK){
                 Toast.makeText(getBaseContext(), "Login successful", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(this, com.example.android.wizardpager.MainActivity.class);
-                startActivity(intent);
-                finish();
+                startActivityForResult(intent,REQUEST_MAINAPP_CODE);
             }
             if (resultCode == RESULT_CANCELED) {
                 Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
+            }
+        }else if(requestCode == REQUEST_MAINAPP_CODE)
+        {
+            if(resultCode == RESULT_OK){
+                Intent intent = new Intent(this, LoginActivity.class);
+                startActivityForResult(intent, LOGIN_ACITIVITY_CODE);
             }
         }
     }//onActivityResult
