@@ -14,23 +14,23 @@ public final class R {
 		public static final int sc_tint_color = 0x7f010069;
 	}
 	public static final class color {
-		public static final int radio_button_selected_color = 0x7f0b004c;
-		public static final int radio_button_unselected_color = 0x7f0b004d;
+		public static final int radio_button_selected_color = 0x7f0b0057;
+		public static final int radio_button_unselected_color = 0x7f0b0058;
 	}
 	public static final class dimen {
 		public static final int radio_button_conner_radius = 0x7f060081;
 		public static final int radio_button_stroke_border = 0x7f060082;
 	}
 	public static final class drawable {
-		public static final int button_text_color = 0x7f020057;
-		public static final int radio_checked = 0x7f02006b;
-		public static final int radio_unchecked = 0x7f02006c;
+		public static final int button_text_color = 0x7f020059;
+		public static final int radio_checked = 0x7f02006d;
+		public static final int radio_unchecked = 0x7f02006e;
 	}
 	public static final class string {
-		public static final int app_name = 0x7f050032;
+		public static final int app_name = 0x7f050033;
 	}
 	public static final class style {
-		public static final int RadioButton = 0x7f0700ba;
+		public static final int RadioButton = 0x7f0700bb;
 	}
 	public static final class styleable {
 		public static final int[] SegmentedGroup = { 0x7f010067, 0x7f010068, 0x7f010069, 0x7f01006a };

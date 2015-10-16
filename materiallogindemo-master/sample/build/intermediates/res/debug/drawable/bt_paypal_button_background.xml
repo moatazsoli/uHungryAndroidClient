@@ -9,4 +9,4 @@
     <item android:drawable="@color/bt_paypal_button_background_pressed" android:state_pressed="true" />
     <item android:drawable="@color/bt_paypal_button_background_pressed" android:state_focused="true" />
     <item android:drawable="@color/bt_paypal_button_background" />
-</selector><!-- From: file:/Users/lkorth/bt/braintree-android/Drop-In/src/main/res/drawable/bt_paypal_button_background.xml --><!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/com.braintreepayments.api/braintree/1.6.5/res/drawable/bt_paypal_button_background.xml -->
+</selector><!-- From: file:/Users/lkorth/bt/braintree-android/Drop-In/src/main/res/drawable/bt_paypal_button_background.xml --><!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/com.braintreepayments.api/braintree/1.7.1/res/drawable/bt_paypal_button_background.xml -->

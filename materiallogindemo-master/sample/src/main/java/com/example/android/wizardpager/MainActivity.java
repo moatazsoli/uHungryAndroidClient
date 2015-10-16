@@ -18,8 +18,8 @@ package com.example.android.wizardpager;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -34,6 +34,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,12 +45,10 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.braintreepayments.api.dropin.BraintreePaymentActivity;
 import com.tech.freak.wizardpager.model.AbstractWizardModel;
 import com.tech.freak.wizardpager.model.DrinksCache;
@@ -64,9 +63,13 @@ import com.tech.freak.wizardpager.ui.PageFragmentCallbacks;
 import com.tech.freak.wizardpager.ui.ReviewFragment;
 import com.tech.freak.wizardpager.ui.StepPagerStrip;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -120,12 +123,176 @@ public class MainActivity extends AppCompatActivity implements
                         setResult(RESULT_OK);
                         finish();
 
+                    }else if(lCurrentListItem.equals("My Orders"))
+                    {
+                        String uri = String.format("https://uhungry-valyriacorp.c9.io/customers/getopenorders/?username=%1$s",
+                                username);
+
+                        JsonObjectRequest jsObjRequest = new JsonObjectRequest
+                                (Request.Method.GET, uri, null, new Response.Listener<JSONObject>() {
+
+                                    @Override
+                                    public void onResponse(JSONObject response) {
+                                        if(response.length() != 0)
+                                        {
+                                            buildOrdersList(response);
+                                            Iterator lIterator = response.keys();
+                                            while(lIterator.hasNext())
+                                            {
+                                                String key = (String) lIterator.next();
+                                                try {
+                                                    JSONObject lJsonObject = (JSONObject) response.getJSONObject(key);
+                                                    String location = lJsonObject.getString("location");
+                                                    String orderdetails = lJsonObject.getString("orderdetails");
+                                                } catch (JSONException e) {
+                                                    e.printStackTrace();
+                                                }
+                                            }
+                                            // Create new fragment and transaction
+                                        }else{
+                                            Toast.makeText(getBaseContext(), "No orders available", Toast.LENGTH_LONG).show();
+                                        }
+                                    }
+                                }, new Response.ErrorListener() {
+
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {
+                                        Toast.makeText(getBaseContext(), error.toString(), Toast.LENGTH_LONG).show();
+                                    }
+                                });
+                        HttpSingleton.getInstance(MainActivity.this).addToRequestQueue(jsObjRequest);
+
+                    }else if(lCurrentListItem.equals("History"))
+                    {
+//                        buildOrdersList();
                     }else{
-                        Toast.makeText(MainActivity.this, "Time for an upgrade!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Selected item: " + lCurrentListItem, Toast.LENGTH_SHORT).show();
                     }
                 }
             }
         });
+    }
+
+
+    private void buildOrdersList(final JSONObject aInOpenOrdersJson)
+    {
+        final HashMap<Integer,String> lMap = new HashMap<Integer,String>();
+        lMap.clear();//maybe final will not recreate it everytime just to double check
+        //remove clear later
+        AlertDialog.Builder builderSingle = new AlertDialog.Builder(MainActivity.this);
+        builderSingle.setTitle("Select an Order:");
+
+//        LayoutInflater inflater = getLayoutInflater();
+//        View convertView = (View) inflater.inflate(R.layout.open_orders_layout, null);
+//        builderSingle.setView(convertView);
+//        builderSingle.setTitle("List");
+//        ListView lv = (ListView) convertView.findViewById(R.id.open_orders_list);
+//        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1);
+//        lv.setAdapter(arrayAdapter);
+
+
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
+                MainActivity.this,
+                android.R.layout.simple_list_item_1);
+        Iterator lIterator = aInOpenOrdersJson.keys();
+        int counter = 0;
+        while(lIterator.hasNext())
+        {
+            String key = (String) lIterator.next();
+            try {
+                JSONObject lJsonObject = (JSONObject) aInOpenOrdersJson.getJSONObject(key);
+                String date = lJsonObject.getString("date");
+                String status = lJsonObject.getString("status");
+                arrayAdapter.add(date+"-order#"+key+" -"+status);
+                lMap.put(counter, key);
+                counter++;
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+//        arrayAdapter.add("Archit");
+        builderSingle.setNegativeButton(
+                "cancel",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        builderSingle.setAdapter(
+                arrayAdapter,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String key = lMap.get(which);
+                        try {
+                            final JSONObject lJsonObject = (JSONObject) aInOpenOrdersJson.getJSONObject(key);
+                            AlertDialog.Builder builderInner = new AlertDialog.Builder(
+                                    MainActivity.this);
+                            builderInner.setMessage(
+                                    "OrderID : "+ lJsonObject.getString("id")+"\n"+
+                                    "Date    : "+ lJsonObject.getString("date")+"\n"+
+                                    "Location: "+ lJsonObject.getString("location")+"\n"+
+                                    "Status  : "+ lJsonObject.getString("status")+"\n"+
+                                    "Price   : "+ lJsonObject.getString("totalprice")+"\n"+
+                                    "Details :\n"+ lJsonObject.getString("orderdetails")+"\n"
+                            );
+                            builderInner.setTitle("Your order");
+                            builderInner.setPositiveButton(
+                                    "Close Order",
+                                    new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(
+                                                DialogInterface dialog,
+                                                int which) {
+                                            AlertDialog.Builder areYouSureDialog = new AlertDialog.Builder(
+                                                    MainActivity.this);
+                                            areYouSureDialog.setMessage("Are you sure you want to close the order?\n" +
+                                                    "This will finalize the order and charge your card.");
+                                            areYouSureDialog.setNegativeButton(
+                                                    "Cancel",
+                                                    new DialogInterface.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(DialogInterface dialog, int which) {
+                                                            dialog.dismiss();
+                                                        }
+                                                    });
+                                            areYouSureDialog.setPositiveButton(
+                                                    "Close Order",
+                                                    new DialogInterface.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(
+                                                                DialogInterface dialog,
+                                                                int which) {
+                                                            dialog.dismiss();
+                                                            try {
+                                                                closeOrder(lJsonObject.getString("id"));
+                                                            } catch (JSONException e) {
+                                                                e.printStackTrace();
+                                                            }
+                                                        }
+                                                    });
+                                            areYouSureDialog.show();
+//                                            dialog.dismiss();
+                                        }
+                                    });
+                            builderInner.setNegativeButton(
+                                    "Cancel",
+                                    new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.dismiss();
+                                        }
+                                    });
+                            builderInner.show();
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+        builderSingle.show();
     }
 
     private void setupDrawer() {
@@ -269,7 +436,6 @@ public class MainActivity extends AppCompatActivity implements
                                             new DialogInterface.OnClickListener() {
                                                 public void onClick(DialogInterface dialog, int whichButton) {
 
-                                                    placeOrder();
                                                     //To check if the user has a method of payment
                                                     String uri = String.format("https://uhungry-valyriacorp.c9.io/customers/getpaymentmethod/?username=%1$s",
                                                             username);
@@ -446,6 +612,47 @@ public class MainActivity extends AppCompatActivity implements
         HttpSingleton.getInstance(this).addToRequestQueue(stringRequest);
     }
 
+    public void closeOrder(final String OrderId)
+    {
+        final ProgressDialog closingOrderDialog = new ProgressDialog(MainActivity.this,
+                R.style.AppTheme_Light_Dialog);
+        closingOrderDialog.setIndeterminate(true);
+        closingOrderDialog.setMessage("Closing order ...");
+        closingOrderDialog.show();
+
+        final StringRequest stringRequest = new StringRequest(Request.Method.POST,"https://uhungry-valyriacorp.c9.io/customers/closeorder/", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                closingOrderDialog.dismiss();
+                if(response.equals("7000"))
+                {
+                    //closing order successfull
+                    Toast.makeText(getBaseContext(), "Your order has been finalized", Toast.LENGTH_LONG).show();
+                }else
+                {
+                    Toast.makeText(getBaseContext(), response, Toast.LENGTH_LONG).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                closingOrderDialog.dismiss();
+                Toast.makeText(getBaseContext(), error.toString(), Toast.LENGTH_LONG).show();
+            }
+        }){
+            @Override
+            protected Map<String,String> getParams(){
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("username",username);
+                params.put("orderid",OrderId);
+
+                return params;
+            }
+        };
+        // Add the request to the RequestQueue.
+        HttpSingleton.getInstance(this).addToRequestQueue(stringRequest);
+    }
+
     public void placeOrder()
     {
         mProgressDialog.setMessage("Placing Order...");
@@ -493,7 +700,7 @@ public class MainActivity extends AppCompatActivity implements
         }
         lTotalPrice = lTotalPrice * 1.13;
 
-        final StringRequest stringRequest = new StringRequest(Request.Method.POST,"https://uhungry-valyriacorp.c9.io/customers/signin/", new Response.Listener<String>() {
+        final StringRequest stringRequest = new StringRequest(Request.Method.POST,"https://uhungry-valyriacorp.c9.io/customers/createorder/", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 mProgressDialog.dismiss();

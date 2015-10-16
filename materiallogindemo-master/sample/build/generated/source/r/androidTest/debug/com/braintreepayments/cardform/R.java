@@ -8,10 +8,10 @@ package com.braintreepayments.cardform;
 
 public final class R {
 	public static final class color {
-		public static final int bt_black = 0x7f0b0015;
-		public static final int bt_blue = 0x7f0b0016;
-		public static final int bt_light_gray = 0x7f0b001a;
-		public static final int bt_red = 0x7f0b001d;
+		public static final int bt_black = 0x7f0b0018;
+		public static final int bt_blue = 0x7f0b0019;
+		public static final int bt_light_gray = 0x7f0b001d;
+		public static final int bt_red = 0x7f0b0020;
 	}
 	public static final class dimen {
 		public static final int bt_floating_edit_text_horizontal_offset = 0x7f060047;
@@ -23,13 +23,13 @@ public final class R {
 		public static final int bt_amex = 0x7f02003e;
 		public static final int bt_card_highlighted = 0x7f020040;
 		public static final int bt_cid_highlighted = 0x7f020041;
-		public static final int bt_cvv_highlighted = 0x7f020042;
-		public static final int bt_diners = 0x7f020043;
-		public static final int bt_discover = 0x7f020044;
-		public static final int bt_jcb = 0x7f020046;
-		public static final int bt_maestro = 0x7f02004c;
-		public static final int bt_mastercard = 0x7f02004d;
-		public static final int bt_visa = 0x7f020055;
+		public static final int bt_cvv_highlighted = 0x7f020043;
+		public static final int bt_diners = 0x7f020044;
+		public static final int bt_discover = 0x7f020045;
+		public static final int bt_jcb = 0x7f020047;
+		public static final int bt_maestro = 0x7f02004e;
+		public static final int bt_mastercard = 0x7f02004f;
+		public static final int bt_visa = 0x7f020057;
 	}
 	public static final class id {
 		public static final int bt_card_form_card_number = 0x7f0c0057;
@@ -52,7 +52,7 @@ public final class R {
 	}
 	public static final class style {
 		public static final int bt_base_textview = 0x7f070029;
-		public static final int bt_card_form_field = 0x7f070144;
-		public static final int bt_card_form_field_landscape = 0x7f070145;
+		public static final int bt_card_form_field = 0x7f070145;
+		public static final int bt_card_form_field_landscape = 0x7f070146;
 	}
 }

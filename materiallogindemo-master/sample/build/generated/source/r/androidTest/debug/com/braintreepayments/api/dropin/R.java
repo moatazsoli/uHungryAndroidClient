@@ -10,19 +10,19 @@ public final class R {
 	public static final class attr {
 	}
 	public static final class color {
-		public static final int bt_base_background = 0x7f0b0014;
-		public static final int bt_black = 0x7f0b0015;
-		public static final int bt_blue = 0x7f0b0016;
-		public static final int bt_blue_pressed = 0x7f0b0017;
-		public static final int bt_border_color = 0x7f0b0018;
-		public static final int bt_button_disabled_color = 0x7f0b0019;
-		public static final int bt_light_gray = 0x7f0b001a;
-		public static final int bt_paypal_button_background = 0x7f0b001b;
-		public static final int bt_paypal_button_background_pressed = 0x7f0b001c;
-		public static final int bt_red = 0x7f0b001d;
-		public static final int bt_very_light_gray = 0x7f0b001e;
-		public static final int bt_white = 0x7f0b001f;
-		public static final int bt_white_pressed = 0x7f0b0020;
+		public static final int bt_base_background = 0x7f0b0017;
+		public static final int bt_black = 0x7f0b0018;
+		public static final int bt_blue = 0x7f0b0019;
+		public static final int bt_blue_pressed = 0x7f0b001a;
+		public static final int bt_border_color = 0x7f0b001b;
+		public static final int bt_button_disabled_color = 0x7f0b001c;
+		public static final int bt_light_gray = 0x7f0b001d;
+		public static final int bt_paypal_button_background = 0x7f0b001e;
+		public static final int bt_paypal_button_background_pressed = 0x7f0b001f;
+		public static final int bt_red = 0x7f0b0020;
+		public static final int bt_very_light_gray = 0x7f0b0021;
+		public static final int bt_white = 0x7f0b0022;
+		public static final int bt_white_pressed = 0x7f0b0023;
 	}
 	public static final class dimen {
 		public static final int bt_default_item_height = 0x7f060044;
@@ -47,27 +47,29 @@ public final class R {
 		public static final int bt_android_pay = 0x7f02003f;
 		public static final int bt_card_highlighted = 0x7f020040;
 		public static final int bt_cid_highlighted = 0x7f020041;
-		public static final int bt_cvv_highlighted = 0x7f020042;
-		public static final int bt_diners = 0x7f020043;
-		public static final int bt_discover = 0x7f020044;
-		public static final int bt_error = 0x7f020045;
-		public static final int bt_jcb = 0x7f020046;
-		public static final int bt_loading = 0x7f020047;
-		public static final int bt_loading_animation = 0x7f020048;
-		public static final int bt_logo_android_pay = 0x7f020049;
-		public static final int bt_logo_paypal = 0x7f02004a;
-		public static final int bt_logo_venmo = 0x7f02004b;
-		public static final int bt_maestro = 0x7f02004c;
-		public static final int bt_mastercard = 0x7f02004d;
-		public static final int bt_payment_button_background = 0x7f02004e;
-		public static final int bt_paypal = 0x7f02004f;
-		public static final int bt_paypal_button = 0x7f020050;
-		public static final int bt_paypal_button_background = 0x7f020051;
-		public static final int bt_secure = 0x7f020052;
-		public static final int bt_submit_button_background = 0x7f020053;
-		public static final int bt_success = 0x7f020054;
-		public static final int bt_visa = 0x7f020055;
-		public static final int bt_white_with_border_background = 0x7f020056;
+		public static final int bt_coinbase = 0x7f020042;
+		public static final int bt_cvv_highlighted = 0x7f020043;
+		public static final int bt_diners = 0x7f020044;
+		public static final int bt_discover = 0x7f020045;
+		public static final int bt_error = 0x7f020046;
+		public static final int bt_jcb = 0x7f020047;
+		public static final int bt_loading = 0x7f020048;
+		public static final int bt_loading_animation = 0x7f020049;
+		public static final int bt_logo_android_pay = 0x7f02004a;
+		public static final int bt_logo_coinbase = 0x7f02004b;
+		public static final int bt_logo_paypal = 0x7f02004c;
+		public static final int bt_logo_venmo = 0x7f02004d;
+		public static final int bt_maestro = 0x7f02004e;
+		public static final int bt_mastercard = 0x7f02004f;
+		public static final int bt_payment_button_background = 0x7f020050;
+		public static final int bt_paypal = 0x7f020051;
+		public static final int bt_paypal_button = 0x7f020052;
+		public static final int bt_paypal_button_background = 0x7f020053;
+		public static final int bt_secure = 0x7f020054;
+		public static final int bt_submit_button_background = 0x7f020055;
+		public static final int bt_success = 0x7f020056;
+		public static final int bt_visa = 0x7f020057;
+		public static final int bt_white_with_border_background = 0x7f020058;
 	}
 	public static final class id {
 		public static final int bt_android_pay_button = 0x7f0c006b;
@@ -138,7 +140,8 @@ public final class R {
 		public static final int bt_default_action_label = 0x7f050018;
 		public static final int bt_default_submit_button_text = 0x7f050019;
 		public static final int bt_descriptor_amex = 0x7f05001a;
-		public static final int bt_descriptor_android_pay = 0x7f05003a;
+		public static final int bt_descriptor_android_pay = 0x7f05003b;
+		public static final int bt_descriptor_coinbase = 0x7f05002b;
 		public static final int bt_descriptor_diners = 0x7f05001b;
 		public static final int bt_descriptor_discover = 0x7f05001c;
 		public static final int bt_descriptor_jcb = 0x7f05001d;
@@ -153,21 +156,22 @@ public final class R {
 		public static final int bt_form_hint_postal_code = 0x7f050026;
 		public static final int bt_form_pay_with_card_header = 0x7f050027;
 		public static final int bt_invalid_card = 0x7f050028;
-		public static final int bt_pay_with_android_pay = 0x7f05003b;
+		public static final int bt_pay_with_android_pay = 0x7f05003c;
+		public static final int bt_pay_with_coinbase = 0x7f05003d;
 		public static final int bt_pay_with_paypal = 0x7f050029;
 		public static final int bt_pay_with_venmo = 0x7f05002a;
 	}
 	public static final class style {
-		public static final int bt_app_switch_button_divider = 0x7f070143;
+		public static final int bt_app_switch_button_divider = 0x7f070144;
 		public static final int bt_base_textview = 0x7f070029;
 		public static final int bt_base_textview_bold = 0x7f07002a;
-		public static final int bt_card_form_field = 0x7f070144;
-		public static final int bt_card_form_field_landscape = 0x7f070145;
-		public static final int bt_form_appswitch_button = 0x7f070146;
-		public static final int bt_horizontal_gray_line = 0x7f070147;
-		public static final int bt_main_view_controller_container = 0x7f070148;
-		public static final int bt_payment_method_app_switch_button = 0x7f070149;
-		public static final int bt_submit_button = 0x7f07014a;
+		public static final int bt_card_form_field = 0x7f070145;
+		public static final int bt_card_form_field_landscape = 0x7f070146;
+		public static final int bt_form_appswitch_button = 0x7f070147;
+		public static final int bt_horizontal_gray_line = 0x7f070148;
+		public static final int bt_main_view_controller_container = 0x7f070149;
+		public static final int bt_payment_method_app_switch_button = 0x7f07014a;
+		public static final int bt_submit_button = 0x7f07014b;
 	}
 	public static final class styleable {
 	}

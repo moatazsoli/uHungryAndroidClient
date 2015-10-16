@@ -19,7 +19,7 @@
     <string msgid="3421042268587513524" name="abc_shareactionprovider_share_with">"Share with"</string>
     <string msgid="7165123711973476752" name="abc_shareactionprovider_share_with_application">"Share with %s"</string>
     <string msgid="1603543279005712093" name="abc_toolbar_collapse_description">"Collapse"</string>
-    <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/com.braintreepayments.api/braintree/1.6.5/res/values-en-rGB/values-en-rGB.xml -->
+    <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/com.braintreepayments.api/braintree/1.7.1/res/values-en-rGB/values-en-rGB.xml -->
     <eat-comment/>
     <string name="bt_add_new_payment_method">Add New Payment Method</string>
     <string name="bt_add_payment_method">Add Funding Source</string>
@@ -30,10 +30,11 @@
     <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/com.braintreepayments/card-form/2.0.1/res/values-en-rGB/values-en-rGB.xml -->
     <eat-comment/>
     <string name="bt_default_action_label">Purchase</string>
-    <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/com.braintreepayments.api/braintree/1.6.5/res/values-en-rGB/values-en-rGB.xml -->
+    <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/com.braintreepayments.api/braintree/1.7.1/res/values-en-rGB/values-en-rGB.xml -->
     <eat-comment/>
     <string name="bt_default_submit_button_text">PURCHASE</string>
     <string name="bt_descriptor_amex">American Express</string>
+    <string name="bt_descriptor_coinbase">Coinbase</string>
     <string name="bt_descriptor_diners">Diners</string>
     <string name="bt_descriptor_discover">Discover</string>
     <string name="bt_descriptor_jcb">JCB</string>
@@ -48,7 +49,7 @@
     <string name="bt_form_hint_cvv">CSC</string>
     <string name="bt_form_hint_expiration">Expiry</string>
     <string name="bt_form_hint_postal_code">Postcode</string>
-    <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/com.braintreepayments.api/braintree/1.6.5/res/values-en-rGB/values-en-rGB.xml -->
+    <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/com.braintreepayments.api/braintree/1.7.1/res/values-en-rGB/values-en-rGB.xml -->
     <eat-comment/>
     <string name="bt_form_pay_with_card_header">Pay With A Card</string>
     <string name="bt_invalid_card">Card details are invalid</string>
