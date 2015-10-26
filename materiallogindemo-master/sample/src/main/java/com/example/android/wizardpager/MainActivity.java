@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements
     private StepPagerStrip mStepPagerStrip;
 
     private void addDrawerItems() {
-        final String[] osArray = { "My Orders", "History", "Payment", "Settings", "Terms of Condition", "Privacy Policy",
+        final String[] osArray = { "My Orders", "History", "Remove Payment Info", "Terms of Condition", "Privacy Policy","Reset",
         "Signout"};
         mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
         mDrawerList.setAdapter(mAdapter);
@@ -123,6 +123,9 @@ public class MainActivity extends AppCompatActivity implements
                         setResult(RESULT_OK);
                         finish();
 
+                    }else if(lCurrentListItem.equals("Remove Payment Info"))
+                    {
+                        removePaymentMethod();
                     }else if(lCurrentListItem.equals("My Orders"))
                     {
                         String uri = String.format("https://uhungry-valyriacorp.c9.io/customers/getopenorders/?username=%1$s",
@@ -136,19 +139,6 @@ public class MainActivity extends AppCompatActivity implements
                                         if(response.length() != 0)
                                         {
                                             buildOrdersList(response);
-                                            Iterator lIterator = response.keys();
-                                            while(lIterator.hasNext())
-                                            {
-                                                String key = (String) lIterator.next();
-                                                try {
-                                                    JSONObject lJsonObject = (JSONObject) response.getJSONObject(key);
-                                                    String location = lJsonObject.getString("location");
-                                                    String orderdetails = lJsonObject.getString("orderdetails");
-                                                } catch (JSONException e) {
-                                                    e.printStackTrace();
-                                                }
-                                            }
-                                            // Create new fragment and transaction
                                         }else{
                                             Toast.makeText(getBaseContext(), "No orders available", Toast.LENGTH_LONG).show();
                                         }
@@ -164,7 +154,31 @@ public class MainActivity extends AppCompatActivity implements
 
                     }else if(lCurrentListItem.equals("History"))
                     {
-//                        buildOrdersList();
+                        String uri = String.format("https://uhungry-valyriacorp.c9.io/customers/getclosedorders/?username=%1$s",
+                        username);
+
+                        JsonObjectRequest jsObjRequest = new JsonObjectRequest
+                                (Request.Method.GET, uri, null, new Response.Listener<JSONObject>() {
+
+                                    @Override
+                                    public void onResponse(JSONObject response) {
+                                        if(response.length() != 0)
+                                        {
+                                            buildClosedOrdersList(response);
+                                        }else{
+                                            Toast.makeText(getBaseContext(), "No closed orders available", Toast.LENGTH_LONG).show();
+                                        }
+                                    }
+                                }, new Response.ErrorListener() {
+
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {
+                                        Toast.makeText(getBaseContext(), error.toString(), Toast.LENGTH_LONG).show();
+                                    }
+                                });
+                        HttpSingleton.getInstance(MainActivity.this).addToRequestQueue(jsObjRequest);
+                    }else if(lCurrentListItem.equals("Reset")) {
+                        resetEverything();
                     }else{
                         Toast.makeText(MainActivity.this, "Selected item: " + lCurrentListItem, Toast.LENGTH_SHORT).show();
                     }
@@ -173,6 +187,45 @@ public class MainActivity extends AppCompatActivity implements
         });
     }
 
+    private void removePaymentMethod()
+    {
+        final ProgressDialog PaymentMethodProgressDialog = new ProgressDialog(MainActivity.this,
+                R.style.AppTheme_Light_Dialog);
+        PaymentMethodProgressDialog.setIndeterminate(true);
+        PaymentMethodProgressDialog.setMessage("Removing payment information...");
+        PaymentMethodProgressDialog.show();
+
+        final StringRequest stringRequest = new StringRequest(Request.Method.POST,"https://uhungry-valyriacorp.c9.io/customers/removepaymentmethod/", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                PaymentMethodProgressDialog.dismiss();
+                if(response.equals("Success"))
+                {
+                    //adding payment method successfull
+                    Toast.makeText(getBaseContext(), "Your payment information has been removed!", Toast.LENGTH_LONG).show();
+
+                }else
+                {
+                    Toast.makeText(getBaseContext(), response, Toast.LENGTH_LONG).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                PaymentMethodProgressDialog.dismiss();
+                Toast.makeText(getBaseContext(), error.toString(), Toast.LENGTH_LONG).show();
+            }
+        }){
+            @Override
+            protected Map<String,String> getParams(){
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("username",username);
+                return params;
+            }
+        };
+        // Add the request to the RequestQueue.
+        HttpSingleton.getInstance(this).addToRequestQueue(stringRequest);
+    }
 
     private void buildOrdersList(final JSONObject aInOpenOrdersJson)
     {
@@ -279,6 +332,89 @@ public class MainActivity extends AppCompatActivity implements
                                     });
                             builderInner.setNegativeButton(
                                     "Cancel",
+                                    new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.dismiss();
+                                        }
+                                    });
+                            builderInner.show();
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+        builderSingle.show();
+    }
+
+    private void buildClosedOrdersList(final JSONObject aInOpenOrdersJson)
+    {
+        final HashMap<Integer,String> lMap = new HashMap<Integer,String>();
+        lMap.clear();//maybe final will not recreate it everytime just to double check
+        //remove clear later
+        AlertDialog.Builder builderSingle = new AlertDialog.Builder(MainActivity.this);
+        builderSingle.setTitle("Closed orders");
+
+//        LayoutInflater inflater = getLayoutInflater();
+//        View convertView = (View) inflater.inflate(R.layout.open_orders_layout, null);
+//        builderSingle.setView(convertView);
+//        builderSingle.setTitle("List");
+//        ListView lv = (ListView) convertView.findViewById(R.id.open_orders_list);
+//        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1);
+//        lv.setAdapter(arrayAdapter);
+
+
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
+                MainActivity.this,
+                android.R.layout.simple_list_item_1);
+        Iterator lIterator = aInOpenOrdersJson.keys();
+        int counter = 0;
+        while(lIterator.hasNext())
+        {
+            String key = (String) lIterator.next();
+            try {
+                JSONObject lJsonObject = (JSONObject) aInOpenOrdersJson.getJSONObject(key);
+                String date = lJsonObject.getString("date");
+                String status = lJsonObject.getString("status");
+                arrayAdapter.add(date+"-order#"+key+" -"+status);
+                lMap.put(counter, key);
+                counter++;
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+//        arrayAdapter.add("Archit");
+        builderSingle.setNegativeButton(
+                "cancel",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        builderSingle.setAdapter(
+                arrayAdapter,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String key = lMap.get(which);
+                        try {
+                            final JSONObject lJsonObject = (JSONObject) aInOpenOrdersJson.getJSONObject(key);
+                            AlertDialog.Builder builderInner = new AlertDialog.Builder(
+                                    MainActivity.this);
+                            builderInner.setMessage(
+                                    "OrderID : " + lJsonObject.getString("id") + "\n" +
+                                            "Date    : " + lJsonObject.getString("date") + "\n" +
+                                            "Location: " + lJsonObject.getString("location") + "\n" +
+                                            "Status  : " + lJsonObject.getString("status") + "\n" +
+                                            "Price   : " + lJsonObject.getString("totalprice") + "\n" +
+                                            "Details :\n" + lJsonObject.getString("orderdetails") + "\n"
+                            );
+                            builderInner.setTitle("Your order");
+                            builderInner.setNegativeButton(
+                                    "Ok",
                                     new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
@@ -689,16 +825,25 @@ public class MainActivity extends AppCompatActivity implements
             }
         }
 
+        double taxes = lTotalPrice * 0.13;
         // taxes and delivery fare.
-        if(lTotalPrice > 0 && lTotalPrice < 10)
+        if(lTotalPrice > 0 && lTotalPrice <= 5)
         {
             lTotalPrice = lTotalPrice + 2;
         }
-        if(lTotalPrice > 10)
+        if(lTotalPrice > 5 && lTotalPrice <= 10)
+        {
+            lTotalPrice = lTotalPrice + 3;
+        }
+        if(lTotalPrice > 10 && lTotalPrice <= 20)
         {
             lTotalPrice = lTotalPrice + 4;
         }
-        lTotalPrice = lTotalPrice * 1.13;
+        if(lTotalPrice > 20)
+        {
+            lTotalPrice = lTotalPrice + 5;
+        }
+        lTotalPrice = lTotalPrice + taxes;
 
         final StringRequest stringRequest = new StringRequest(Request.Method.POST,"https://uhungry-valyriacorp.c9.io/customers/createorder/", new Response.Listener<String>() {
             @Override
@@ -707,6 +852,7 @@ public class MainActivity extends AppCompatActivity implements
                 if(response.equals("5000"))
                 {
                     Toast.makeText(getBaseContext(), "Success! Sit tight while we bring you your order!", Toast.LENGTH_LONG).show();
+                    resetEverything();
                 }else{
                     if(response.equals("5001"))
                     {
@@ -748,6 +894,17 @@ public class MainActivity extends AppCompatActivity implements
         }else {
             mPager.setCurrentItem(mPager.getCurrentItem() - 1);
         }
+    }
+
+    public void resetEverything()
+    {
+        FoodCache.getInstance().reset();
+        DrinksCache.getInstance().reset();
+        OrderCache.getInstance().reset();
+        Intent intent = getIntent();
+        finish();
+        startActivity(intent);
+
     }
 
     @Override

@@ -74,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == LOGIN_ACITIVITY_CODE) {
             if(resultCode == RESULT_OK){
                 Toast.makeText(getBaseContext(), "Login successful", Toast.LENGTH_LONG).show();
+                Toast.makeText(getBaseContext(), "Welcome to uHungry!", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(this, com.example.android.wizardpager.MainActivity.class);
                 startActivityForResult(intent,REQUEST_MAINAPP_CODE);
             }

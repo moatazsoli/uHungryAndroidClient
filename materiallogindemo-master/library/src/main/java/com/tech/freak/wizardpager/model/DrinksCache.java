@@ -51,5 +51,10 @@ public class DrinksCache {
         return selectedProducts;
     }
 
+    public void reset()
+    {
+        selectedProducts.clear();
+    }
+
 
 }

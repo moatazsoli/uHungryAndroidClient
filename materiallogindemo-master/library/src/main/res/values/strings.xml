@@ -9,7 +9,7 @@
         <item>Pick from gallery</item>
         <item>Capture new photo</item>
     </string-array>
-
+    <string name="total_price">Total Price</string>
     <string name="drink_size">Select Size</string>
     <string name="size">Size</string>
     <string name="comments_details">Enter Comments/Details</string>

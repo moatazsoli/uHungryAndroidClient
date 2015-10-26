@@ -38,6 +38,7 @@
     <string name="submit_confirm_message">Place the order with uHungry? You will receive an email
         confirmation.</string>
     <string name="title_activity_my">MyActivity</string>
+    <string name="total_price">Total Price</string>
     <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/src/main/res/values/styles.xml -->
     <eat-comment/>
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">

@@ -336,7 +336,7 @@ public class FoodCustomAdapter extends BaseAdapter implements ListAdapter {
                 .getOptions().get(0));//first choice is always selected in single choice dialog
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder .setSingleChoiceItems(aInFoodOption.getOptions().toArray(new CharSequence[currentFoodItem.getOptions().size()]),0,
+        builder .setSingleChoiceItems(aInFoodOption.getOptions().toArray(new CharSequence[aInFoodOption.getOptions().size()]),0,
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         String itemSelected = currentFoodItem.getOptions().get(stepNumber)

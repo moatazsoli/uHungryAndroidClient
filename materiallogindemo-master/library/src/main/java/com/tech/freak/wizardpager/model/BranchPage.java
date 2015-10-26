@@ -89,6 +89,7 @@ public class BranchPage extends SingleFixedChoicePage {
                 "Dunton Tower", "Kailash Metal Theatre", "Paterson Hall", "Southam Hall",
                 "Loeb Building", "Steacie Building", "Mackenzie Building", "Minto Center",
                 "Tory Building", "University Center", "Herzberg Labs").setRequired(true));
+        lPages.add(new PricePage(callbacks,"TotalPrice"));
 
         PageList childPageList = new PageList(lPages);
         for (Page page : childPageList) {
@@ -141,4 +142,5 @@ public class BranchPage extends SingleFixedChoicePage {
             this.childPageList = childPageList;
         }
     }
+
 }

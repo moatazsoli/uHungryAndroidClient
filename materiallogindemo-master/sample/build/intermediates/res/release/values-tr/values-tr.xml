@@ -19,7 +19,7 @@
     <string msgid="3421042268587513524" name="abc_shareactionprovider_share_with">"Şununla paylaş"</string>
     <string msgid="7165123711973476752" name="abc_shareactionprovider_share_with_application">"%s ile paylaş"</string>
     <string msgid="1603543279005712093" name="abc_toolbar_collapse_description">"Daralt"</string>
-    <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/com.braintreepayments.api/braintree/1.7.1/res/values-tr/values-tr.xml -->
+    <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/com.braintreepayments.api/braintree/1.7.3/res/values-tr/values-tr.xml -->
     <eat-comment/>
     <string name="bt_add_new_payment_method">Yeni Ödeme Yöntemi Ekleyin</string>
     <string name="bt_add_payment_method">Ödeme Yöntemi Ekleyin</string>
@@ -30,7 +30,7 @@
     <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/com.braintreepayments/card-form/2.0.1/res/values-tr/values-tr.xml -->
     <eat-comment/>
     <string name="bt_default_action_label">Satın Alın</string>
-    <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/com.braintreepayments.api/braintree/1.7.1/res/values-tr/values-tr.xml -->
+    <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/com.braintreepayments.api/braintree/1.7.3/res/values-tr/values-tr.xml -->
     <eat-comment/>
     <string name="bt_default_submit_button_text">Satın Alın</string>
     <string name="bt_descriptor_amex">Amex</string>
@@ -48,7 +48,7 @@
     <string name="bt_form_hint_cvv">CVV</string>
     <string name="bt_form_hint_expiration">Son Kullanım</string>
     <string name="bt_form_hint_postal_code">Posta Kodu</string>
-    <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/com.braintreepayments.api/braintree/1.7.1/res/values-tr/values-tr.xml -->
+    <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/com.braintreepayments.api/braintree/1.7.3/res/values-tr/values-tr.xml -->
     <eat-comment/>
     <string name="bt_form_pay_with_card_header">BİR KARTLA ÖDEME YAPIN</string>
     <string name="bt_invalid_card">Kart bilgileri geçersiz</string>

@@ -8,7 +8,7 @@ import java.util.LinkedHashMap;
  */
 public class Restaurant {
 
-    public static String RESTURANT_NAME;
+    public String RESTURANT_NAME;
     public LinkedHashMap<String, ArrayList<Products>> products;
 
     public Restaurant(String aInRestaurantName) {

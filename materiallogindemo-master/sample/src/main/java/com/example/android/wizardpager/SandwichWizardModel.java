@@ -18,21 +18,14 @@ package com.example.android.wizardpager;
 
 import android.content.Context;
 
-import com.example.android.wizardpager.pages.CustomerInfoPage;
-import com.tech.freak.wizardpager.model.AddRemoveItemsPage;
 import com.tech.freak.wizardpager.model.AbstractWizardModel;
 import com.tech.freak.wizardpager.model.BranchPage;
 import com.tech.freak.wizardpager.model.DrinkItem;
 import com.tech.freak.wizardpager.model.FoodItem;
 import com.tech.freak.wizardpager.model.FoodOption;
-import com.tech.freak.wizardpager.model.MultipleFixedChoicePage;
-import com.tech.freak.wizardpager.model.NumberPage;
 import com.tech.freak.wizardpager.model.PageList;
-import com.tech.freak.wizardpager.model.ProductItem;
 import com.tech.freak.wizardpager.model.Products;
 import com.tech.freak.wizardpager.model.Restaurant;
-import com.tech.freak.wizardpager.model.SingleFixedChoicePage;
-import com.tech.freak.wizardpager.model.TextPage;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -41,6 +34,7 @@ import java.util.LinkedHashMap;
 
 public class SandwichWizardModel extends AbstractWizardModel {
     Restaurant lTim;
+    Restaurant lSubway;
 
     public SandwichWizardModel(Context context) {
         super(context);
@@ -53,7 +47,7 @@ public class SandwichWizardModel extends AbstractWizardModel {
                              {{
                                      put("Food", new ArrayList<Products>() {{
                                          add(new FoodItem("Bagel",
-                                                         new HashMap<String, Double>(){{put("S",1.95);}},
+                                                         new HashMap<String, Double>(){{put("S",2.36);}},
                                                          new ArrayList<FoodOption>(){
                                                              {
                                                                  add(new FoodOption("Bread",
@@ -186,6 +180,313 @@ public class SandwichWizardModel extends AbstractWizardModel {
 
             );
 
-        return new PageList(new BranchPage(this, "Resturant").addRestaurant(lTim, this));
+
+            lSubway = new Restaurant("Subway");
+            lSubway.setProducts(new LinkedHashMap<String, ArrayList<Products>>() {{
+                                    put("Food", new ArrayList<Products>() {{
+                                        add(new FoodItem("Meatball Marinara",
+                                                        new HashMap<String, Double>() {{
+                                                            put("S", 3.75);
+                                                            put("M", 5.95);
+                                                        }},
+                                                        new ArrayList<FoodOption>() {
+                                                            {
+                                                                add(getSubwayBread());
+                                                                add(getSubwayCheese());
+                                                                add(getSubwayVeggies());
+                                                                add(getSubwaySauces());
+                                                            }
+                                                        }
+
+
+                                                )
+                                        );
+
+                                        add(new FoodItem("Roast Beef",
+                                                        new HashMap<String, Double>() {{
+                                                            put("S", 4.75);
+                                                            put("M", 7.5);
+                                                        }},
+                                                        new ArrayList<FoodOption>() {
+                                                            {
+                                                                add(getSubwayBread());
+                                                                add(getSubwayCheese());
+                                                                add(getSubwayVeggies());
+                                                                add(getSubwaySauces());
+                                                            }
+                                                        }
+
+
+                                                )
+                                        );
+
+                                        add(new FoodItem("Spicy Italian",
+                                                        new HashMap<String, Double>() {{
+                                                            put("S", 4.75);
+                                                            put("M", 7.5);
+                                                        }},
+                                                        new ArrayList<FoodOption>() {
+                                                            {
+                                                                add(getSubwayBread());
+                                                                add(getSubwayCheese());
+                                                                add(getSubwayVeggies());
+                                                                add(getSubwaySauces());
+                                                            }
+                                                        }
+
+
+                                                )
+                                        );
+
+                                        add(new FoodItem("Turkey Breast",
+                                                        new HashMap<String, Double>() {{
+                                                            put("S", 4.75);
+                                                            put("M", 7.5);
+                                                        }},
+                                                        new ArrayList<FoodOption>() {
+                                                            {
+                                                                add(getSubwayBread());
+                                                                add(getSubwayCheese());
+                                                                add(getSubwayVeggies());
+                                                                add(getSubwaySauces());
+                                                            }
+                                                        }
+
+
+                                                )
+                                        );
+
+                                        add(new FoodItem("Meatball Marinara",
+                                                        new HashMap<String, Double>() {{
+                                                            put("S", 3.75);
+                                                            put("M", 5.95);
+                                                        }},
+                                                        new ArrayList<FoodOption>() {
+                                                            {
+                                                                add(getSubwayBread());
+                                                                add(getSubwayCheese());
+                                                                add(getSubwayVeggies());
+                                                                add(getSubwaySauces());
+                                                            }
+                                                        }
+
+
+                                                )
+                                        );
+
+                                        add(new FoodItem("Oven Roasted Chicken Breast",
+                                                        new HashMap<String, Double>() {{
+                                                            put("S", 5.95);
+                                                            put("M", 8.95);
+                                                        }},
+                                                        new ArrayList<FoodOption>() {
+                                                            {
+                                                                add(getSubwayBread());
+                                                                add(getSubwayCheese());
+                                                                add(getSubwayVeggies());
+                                                                add(getSubwaySauces());
+                                                            }
+                                                        }
+
+
+                                                )
+                                        );
+
+                                        add(new FoodItem("Steak & Cheese",
+                                                        new HashMap<String, Double>() {{
+                                                            put("S", 5.95);
+                                                            put("M", 8.95);
+                                                        }},
+                                                        new ArrayList<FoodOption>() {
+                                                            {
+                                                                add(getSubwayBread());
+                                                                add(getSubwayCheese());
+                                                                add(getSubwayVeggies());
+                                                                add(getSubwaySauces());
+                                                            }
+                                                        }
+
+
+                                                )
+                                        );
+
+                                        add(new FoodItem("Subway Club",
+                                                        new HashMap<String, Double>() {{
+                                                            put("S", 5.95);
+                                                            put("M", 8.95);
+                                                        }},
+                                                        new ArrayList<FoodOption>() {
+                                                            {
+                                                                add(getSubwayBread());
+                                                                add(getSubwayCheese());
+                                                                add(getSubwayVeggies());
+                                                                add(getSubwaySauces());
+                                                            }
+                                                        }
+
+
+                                                )
+                                        );
+
+                                        add(new FoodItem("Sweet Onion Chicken Teriyaki",
+                                                        new HashMap<String, Double>() {{
+                                                            put("S", 5.95);
+                                                            put("M", 8.95);
+                                                        }},
+                                                        new ArrayList<FoodOption>() {
+                                                            {
+                                                                add(getSubwayBread());
+                                                                add(getSubwayCheese());
+                                                                add(getSubwayVeggies());
+                                                                add(getSubwaySauces());
+                                                            }
+                                                        }
+
+
+                                                )
+                                        );
+
+                                        add(new FoodItem("Tuna",
+                                                        new HashMap<String, Double>() {{
+                                                            put("S", 4.75);
+                                                            put("M", 7.5);
+                                                        }},
+                                                        new ArrayList<FoodOption>() {
+                                                            {
+                                                                add(getSubwayBread());
+                                                                add(getSubwayCheese());
+                                                                add(getSubwayVeggies());
+                                                                add(getSubwaySauces());
+                                                            }
+                                                        }
+
+
+                                                )
+                                        );
+
+                                        add(new FoodItem("Veggie Delite",
+                                                        new HashMap<String, Double>() {{
+                                                            put("S", 3.75);
+                                                            put("M", 5.95);
+                                                        }},
+                                                        new ArrayList<FoodOption>() {
+                                                            {
+                                                                add(getSubwayBread());
+                                                                add(getSubwayCheese());
+                                                                add(getSubwayVeggies());
+                                                                add(getSubwaySauces());
+                                                            }
+                                                        }
+
+
+                                                )
+                                        );
+                                    }});
+
+                                    put("Drinks", new ArrayList<Products>() {{
+                                        add(new DrinkItem("Coke",
+                                                        new HashMap<String, Double>() {{
+                                                            put("S", 1.33);
+                                                        }},
+                                                        DrinkItem.NO_OPTIONS,
+                                                        null
+                                                )
+                                        );
+                                        add(new DrinkItem("Pepsi",
+                                                        new HashMap<String, Double>() {{
+                                                            put("S", 2.00);
+                                                        }},
+                                                        DrinkItem.NO_OPTIONS,
+                                                        null
+                                                )
+                                        );
+                                        add(new DrinkItem("Root Beer",
+                                                        new HashMap<String, Double>() {{
+                                                            put("S", 2.00);
+                                                        }},
+                                                        DrinkItem.NO_OPTIONS,
+                                                        null
+                                                )
+                                        );
+                                        add(new DrinkItem("Water",
+                                                        new HashMap<String, Double>() {{
+                                                            put("S", 2.00);
+                                                        }},
+                                                        DrinkItem.NO_OPTIONS,
+                                                        null
+                                                )
+                                        );
+                                        add(new DrinkItem("Sprite",
+                                                        new HashMap<String, Double>() {{
+                                                            put("S", 2.00);
+                                                        }},
+                                                        DrinkItem.NO_OPTIONS,
+                                                        null
+                                                )
+                                        );
+                                    }});
+                                }}
+
+            );
+
+        return new PageList(new BranchPage(this, "Resturant")
+                .addRestaurant(lTim, this)
+                .addRestaurant(lSubway, this)
+        );
+    }
+
+    public FoodOption getSubwayVeggies()
+    {
+        return new FoodOption("Veggies",
+                FoodOption.MULTI_CHOICES,
+                new ArrayList<String>() {{
+                    add("Tomatoes");
+                    add("Lettuce");
+                    add("Cucumbers");
+                    add("Black Olives");
+                    add("Green Bell Peppers");
+                    add("Red Onions");
+                    add("Banana Peppers");
+                    add("Jalapenos");
+                    add("Pickles");
+                }});
+    }
+
+    public FoodOption getSubwayCheese()
+    {
+        return new FoodOption("Cheese",
+                FoodOption.SINGLE_CHOICE,
+                new ArrayList<String>() {{
+                    add("American");
+                    add("Monterey Cheddar");
+                }});
+    }
+
+    public FoodOption getSubwayBread()
+    {
+        return new FoodOption("Bread",
+                FoodOption.SINGLE_CHOICE,
+                new ArrayList<String>() {{
+                    add("9-Grain Honey Oat");
+                    add("9-Grain Wheat");
+                    add("Italian");
+                    add("Italian Herbs & Cheese");
+                    add("Flatbread (not baked in restaurant)");
+                }});
+    }
+
+    public FoodOption getSubwaySauces()
+    {
+        return new FoodOption("Sauces",
+                FoodOption.MULTI_CHOICES,
+                new ArrayList<String>() {{
+                    add("Chipotle Southwest");
+                    add("Light or Regular Mayonnaise");
+                    add("Ranch");
+                    add("Oil");
+                    add("Mustard");
+                    add("Vinegar");
+                    add("Sweet Onion");
+                }});
     }
 }

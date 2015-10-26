@@ -31,6 +31,11 @@ public class OrderCache {
         this.selectedLocation = selectedLocation;
     }
 
+    public void reset()
+    {
+        selectedProducts.clear();
+    }
+
 
 
 

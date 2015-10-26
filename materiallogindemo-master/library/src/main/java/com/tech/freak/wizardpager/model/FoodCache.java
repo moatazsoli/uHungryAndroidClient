@@ -51,5 +51,10 @@ public class FoodCache {
         return selectedProducts;
     }
 
+    public void reset()
+    {
+        selectedProducts.clear();
+    }
+
 
 }

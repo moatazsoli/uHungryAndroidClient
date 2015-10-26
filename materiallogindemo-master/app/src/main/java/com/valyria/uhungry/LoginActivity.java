@@ -31,6 +31,7 @@ public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
     private static final int REQUEST_MAINAPP = 10;
+    private static final int REQUEST_ACTIVATE = 100;
 
     @InjectView(R.id.input_email) EditText _emailText;
     @InjectView(R.id.input_password) EditText _passwordText;
@@ -97,8 +98,9 @@ public class LoginActivity extends AppCompatActivity {
                 }else{
                     if(response.equals("3001"))
                     {
-                        onLoginFailed();
-                        Toast.makeText(getBaseContext(), "Please activate your account", Toast.LENGTH_LONG).show();
+                        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                        prefs.edit().putString("username", email).commit(); // email is a string
+                        launchActivationActivity();
                     }else if(response.equals("3003"))
                     {
                         onLoginFailed();
@@ -125,43 +127,29 @@ public class LoginActivity extends AppCompatActivity {
 
         // Add the request to the RequestQueue.
         HttpSingleton.getInstance(this).addToRequestQueue(stringRequest);
-//        new android.os.Handler().postDelayed(
-//                new Runnable() {
-//                    public void run() {
-//                        // On complete call either onLoginSuccess or onLoginFailed
-//                        onLoginSuccess();
-//                        // onLoginFailed();
-//                        progressDialog.dismiss();
-//                    }
-//                }, 3000);
+    }
 
-
-//        RequestQueue queue = Volley.newRequestQueue(this);
-//        String url ="http://www.google.com";
-//
-//        // Request a string response from the provided URL.
-//        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-//                new Response.Listener<String>() {
-//
-//                    @Override
-//                    public void onResponse(String response) {
-//                        // Display the first 500 characters of the response string.
-//        //                        mTextView.setText("Response is: "+ response.substring(0,500));
-//                    }
-//                }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//        //                mTextView.setText("That didn't work!");
-//            }
-//        });
-//        // Add the request to the RequestQueue.
-//        HttpSingleton.getInstance(this).addToRequestQueue(stringRequest);
+    public void launchActivationActivity()
+    {
+        Toast.makeText(getBaseContext(), "Please Activate your account", Toast.LENGTH_LONG).show();
+        _loginButton.setEnabled(true);
+        Intent intent = new Intent(getApplicationContext(), SmsActivationActivity.class);
+        startActivityForResult(intent, REQUEST_ACTIVATE);
     }
 
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_SIGNUP) {
+            if (resultCode == RESULT_OK) {
+//                setResult(RESULT_OK);
+//                this.finish();
+                launchActivationActivity();
+
+            }
+        }
+
+        if (requestCode == REQUEST_ACTIVATE) {
             if (resultCode == RESULT_OK) {
                 setResult(RESULT_OK);
                 this.finish();

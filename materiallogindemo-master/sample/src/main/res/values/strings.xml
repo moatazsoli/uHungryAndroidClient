@@ -16,7 +16,7 @@
 
 <resources>
     <string name="app_name">Place Order</string>
-
+    <string name="total_price">Total Price</string>
     <string name="next">Next</string>
     <string name="prev">Previous</string>
     <string name="finish">Submit order</string>

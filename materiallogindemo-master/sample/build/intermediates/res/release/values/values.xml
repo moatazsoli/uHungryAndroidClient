@@ -122,14 +122,14 @@
     <color name="bright_foreground_inverse_material_light">@color/bright_foreground_material_dark</color>
     <color name="bright_foreground_material_dark">@android:color/white</color>
     <color name="bright_foreground_material_light">@android:color/black</color>
-    <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/com.braintreepayments.api/braintree/1.7.1/res/values/values.xml -->
+    <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/com.braintreepayments.api/braintree/1.7.3/res/values/values.xml -->
     <eat-comment/>
     <color name="bt_base_background">#F3F4F6</color>
     <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/com.braintreepayments/card-form/2.0.1/res/values/values.xml -->
     <eat-comment/>
     <color name="bt_black">#001129</color>
     <color name="bt_blue">#009BDE</color>
-    <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/com.braintreepayments.api/braintree/1.7.1/res/values/values.xml -->
+    <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/com.braintreepayments.api/braintree/1.7.3/res/values/values.xml -->
     <eat-comment/>
     <color name="bt_blue_pressed">#008BC7</color>
     <color name="bt_border_color">#99999A</color>
@@ -137,7 +137,7 @@
     <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/com.braintreepayments/card-form/2.0.1/res/values/values.xml -->
     <eat-comment/>
     <color name="bt_light_gray">#6d6d6d</color>
-    <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/com.braintreepayments.api/braintree/1.7.1/res/values/values.xml -->
+    <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/com.braintreepayments.api/braintree/1.7.3/res/values/values.xml -->
     <eat-comment/>
     <color name="bt_paypal_button_background">#009BDE</color>
     <color name="bt_paypal_button_background_pressed">#0C8DC4</color>
@@ -342,7 +342,7 @@
     <eat-comment/>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/com.braintreepayments.api/braintree/1.7.1/res/values/values.xml -->
+    <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/com.braintreepayments.api/braintree/1.7.3/res/values/values.xml -->
     <eat-comment/>
     <dimen name="bt_default_item_height">50dp</dimen>
     <dimen name="bt_default_small_text_size">11sp</dimen>
@@ -350,7 +350,7 @@
     <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/com.braintreepayments/card-form/2.0.1/res/values/values.xml -->
     <eat-comment/>
     <dimen name="bt_floating_edit_text_horizontal_offset">12dp</dimen>
-    <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/com.braintreepayments.api/braintree/1.7.1/res/values/values.xml -->
+    <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/com.braintreepayments.api/braintree/1.7.3/res/values/values.xml -->
     <eat-comment/>
     <dimen name="bt_form_appswitch_button_size">40dp</dimen>
     <dimen name="bt_form_field_padding">12dp</dimen>
@@ -361,7 +361,7 @@
     <eat-comment/>
     <dimen name="bt_input_text_size">16sp</dimen>
     <dimen name="bt_landscape_max_width">500dp</dimen>
-    <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/com.braintreepayments.api/braintree/1.7.1/res/values/values.xml -->
+    <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/com.braintreepayments.api/braintree/1.7.3/res/values/values.xml -->
     <eat-comment/>
     <dimen name="bt_payment_method_button_divider_height">30dp</dimen>
     <dimen name="bt_payment_method_button_divider_width">1dp</dimen>
@@ -460,7 +460,7 @@
     <integer name="abc_config_activityDefaultDur">220</integer>
     <integer name="abc_config_activityShortDur">150</integer>
     <integer name="abc_max_action_buttons">2</integer>
-    <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/com.braintreepayments.api/braintree/1.7.1/res/values/values.xml -->
+    <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/com.braintreepayments.api/braintree/1.7.3/res/values/values.xml -->
     <eat-comment/>
     <integer name="bt_match_parent">-1</integer>
     <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml -->
@@ -516,7 +516,7 @@
     <string name="basic_list_notitle">Basic List (No Title)</string>
     <string name="basic_longContent">Basic (Long Content)</string>
     <string name="basic_notitle">Basic (No Title)</string>
-    <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/com.braintreepayments.api/braintree/1.7.1/res/values/values.xml -->
+    <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/com.braintreepayments.api/braintree/1.7.3/res/values/values.xml -->
     <eat-comment/>
     <string name="bt_add_new_payment_method">Add New Payment Method</string>
     <string name="bt_add_payment_method">Add Payment Method</string>
@@ -527,7 +527,7 @@
     <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/com.braintreepayments/card-form/2.0.1/res/values/values.xml -->
     <eat-comment/>
     <string name="bt_default_action_label">Purchase</string>
-    <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/com.braintreepayments.api/braintree/1.7.1/res/values/values.xml -->
+    <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/com.braintreepayments.api/braintree/1.7.3/res/values/values.xml -->
     <eat-comment/>
     <string name="bt_default_submit_button_text">PURCHASE</string>
     <string name="bt_descriptor_amex">Amex</string>
@@ -547,7 +547,7 @@
     <string name="bt_form_hint_cvv">CVV</string>
     <string name="bt_form_hint_expiration">Expiration</string>
     <string name="bt_form_hint_postal_code">Postal Code</string>
-    <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/com.braintreepayments.api/braintree/1.7.1/res/values/values.xml -->
+    <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/com.braintreepayments.api/braintree/1.7.3/res/values/values.xml -->
     <eat-comment/>
     <string name="bt_form_pay_with_card_header">Pay With a Card</string>
     <string name="bt_invalid_card">Card information is invalid</string>
@@ -684,6 +684,7 @@
     <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="title_activity_my">MyActivity</string>
+    <string name="total_price">Total Price</string>
     <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/materiallogindemo-master/library/unspecified/res/values/values.xml -->
     <eat-comment/>
     <string name="useGoogleLocationServices">Use Google\'s Location Services?</string>
@@ -2077,7 +2078,7 @@
         <item name="android:textSize">36sp</item>
         <item name="android:textColor">#ff0099cc</item>
     </style>
-    <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/com.braintreepayments.api/braintree/1.7.1/res/values/values.xml -->
+    <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/com.braintreepayments.api/braintree/1.7.3/res/values/values.xml -->
     <eat-comment/>
     <style name="bt_app_switch_button_divider">
         <item name="android:layout_height">@dimen/bt_payment_method_button_divider_height</item>
@@ -2091,7 +2092,7 @@
     <style name="bt_base_textview">
         <item name="android:textSize">@dimen/bt_input_text_size</item>
     </style>
-    <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/com.braintreepayments.api/braintree/1.7.1/res/values/values.xml -->
+    <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/com.braintreepayments.api/braintree/1.7.3/res/values/values.xml -->
     <eat-comment/>
     <style name="bt_base_textview_bold">
         <item name="android:textSize">@dimen/bt_default_text_size</item>
@@ -2115,7 +2116,7 @@
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_weight">1</item>
     </style>
-    <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/com.braintreepayments.api/braintree/1.7.1/res/values/values.xml -->
+    <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/com.braintreepayments.api/braintree/1.7.3/res/values/values.xml -->
     <eat-comment/>
     <style name="bt_form_appswitch_button">
         <item name="android:layout_width">0dp</item>

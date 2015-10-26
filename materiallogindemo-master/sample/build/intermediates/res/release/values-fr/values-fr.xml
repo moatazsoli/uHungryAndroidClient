@@ -19,7 +19,7 @@
     <string msgid="3421042268587513524" name="abc_shareactionprovider_share_with">"Partager avec"</string>
     <string msgid="7165123711973476752" name="abc_shareactionprovider_share_with_application">"Partager avec %s"</string>
     <string msgid="1603543279005712093" name="abc_toolbar_collapse_description">"Réduire"</string>
-    <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/com.braintreepayments.api/braintree/1.7.1/res/values-fr/values-fr.xml -->
+    <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/com.braintreepayments.api/braintree/1.7.3/res/values-fr/values-fr.xml -->
     <eat-comment/>
     <string name="bt_add_new_payment_method">Ajouter un mode de paiement</string>
     <string name="bt_add_payment_method">Ajouter un mode de paiement</string>
@@ -30,7 +30,7 @@
     <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/com.braintreepayments/card-form/2.0.1/res/values-fr/values-fr.xml -->
     <eat-comment/>
     <string name="bt_default_action_label">Acheter</string>
-    <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/com.braintreepayments.api/braintree/1.7.1/res/values-fr/values-fr.xml -->
+    <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/com.braintreepayments.api/braintree/1.7.3/res/values-fr/values-fr.xml -->
     <eat-comment/>
     <string name="bt_default_submit_button_text">ACHETER</string>
     <string name="bt_descriptor_amex">American Express</string>
@@ -48,7 +48,7 @@
     <string name="bt_form_hint_cvv">Crypto.</string>
     <string name="bt_form_hint_expiration">Expiration</string>
     <string name="bt_form_hint_postal_code">Code postal</string>
-    <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/com.braintreepayments.api/braintree/1.7.1/res/values-fr/values-fr.xml -->
+    <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/com.braintreepayments.api/braintree/1.7.3/res/values-fr/values-fr.xml -->
     <eat-comment/>
     <string name="bt_form_pay_with_card_header">Payer Par Carte</string>
     <string name="bt_invalid_card">Les informations de carte sont incorrectes</string>
