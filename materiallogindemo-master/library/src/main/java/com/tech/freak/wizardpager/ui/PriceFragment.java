@@ -114,19 +114,26 @@ public class PriceFragment extends Fragment {
         }
 
         // taxes and delivery fare.
-        lTotalPrice = lTotalPrice * 1.13;
-        if(lTotalPrice > 0 && lTotalPrice < 5)
+        double taxes = lTotalPrice * 0.13;
+        // taxes and delivery fare.
+        if(lTotalPrice > 0 && lTotalPrice <= 5)
         {
             lTotalPrice = lTotalPrice + 2;
         }
-        if(lTotalPrice >= 5 && lTotalPrice < 10)
+        else if(lTotalPrice > 5 && lTotalPrice <= 10)
         {
             lTotalPrice = lTotalPrice + 3;
         }
-        if(lTotalPrice > 10)
+        else if(lTotalPrice > 10 && lTotalPrice <= 20)
         {
             lTotalPrice = lTotalPrice + 4;
         }
+        else if(lTotalPrice > 20)
+        {
+            lTotalPrice = lTotalPrice + 5;
+        }
+        lTotalPrice = lTotalPrice + taxes;
+
 
         DecimalFormat df = new DecimalFormat("#.00");
         df.setRoundingMode(RoundingMode.UP);

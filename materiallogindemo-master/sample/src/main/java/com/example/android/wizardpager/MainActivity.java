@@ -831,15 +831,15 @@ public class MainActivity extends AppCompatActivity implements
         {
             lTotalPrice = lTotalPrice + 2;
         }
-        if(lTotalPrice > 5 && lTotalPrice <= 10)
+        else if(lTotalPrice > 5 && lTotalPrice <= 10)
         {
             lTotalPrice = lTotalPrice + 3;
         }
-        if(lTotalPrice > 10 && lTotalPrice <= 20)
+        else if(lTotalPrice > 10 && lTotalPrice <= 20)
         {
             lTotalPrice = lTotalPrice + 4;
         }
-        if(lTotalPrice > 20)
+        else if(lTotalPrice > 20)
         {
             lTotalPrice = lTotalPrice + 5;
         }

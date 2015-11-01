@@ -33,6 +33,7 @@
         </activity>
         <activity android:name="com.valyria.uhungry.LoginActivity" android:theme="@style/AppTheme.Dark.Custom" />
         <activity android:name="com.valyria.uhungry.SignupActivity" android:theme="@style/AppTheme.Dark.Custom" />
+        <activity android:name="com.valyria.uhungry.SmsActivationActivity" android:theme="@style/AppTheme.Dark.Custom" />
 
         <service android:name="com.parse.PushService" />
         <receiver android:name="com.parse.ParsePushBroadcastReceiver"

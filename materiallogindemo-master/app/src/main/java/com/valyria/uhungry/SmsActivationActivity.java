@@ -87,7 +87,7 @@ public class SmsActivationActivity extends AppCompatActivity {
         final String code = _codeText.getText().toString();
 
 
-        final StringRequest stringRequest = new StringRequest(Request.Method.POST,"https://uhungry-valyriacorp.c9.io/customers/signin/", new Response.Listener<String>() {
+        final StringRequest stringRequest = new StringRequest(Request.Method.POST,"https://uhungry-valyriacorp.c9.io/customers/checkcode/", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 progressDialog.dismiss();
@@ -199,7 +199,7 @@ public class SmsActivationActivity extends AppCompatActivity {
         String phone = _phoneText.getText().toString();
         String code = _codeText.getText().toString();
 
-        if (phone.isEmpty() || phone.startsWith("+")) {
+        if (phone.isEmpty() || !phone.startsWith("+")) {
             _phoneText.setError("Enter Code with + and country code");
             valid = false;
         } else {

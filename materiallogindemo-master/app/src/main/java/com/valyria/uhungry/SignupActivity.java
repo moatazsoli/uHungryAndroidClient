@@ -89,10 +89,10 @@ public class SignupActivity extends AppCompatActivity {
                 progressDialog.dismiss();
                 if(response.equals("2000"))
                 {
-                    onSignupSuccess();
                     Toast.makeText(getBaseContext(), "Registration Successful", Toast.LENGTH_LONG).show();
                     SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                     prefs.edit().putString("username", email).commit(); // email is a string
+                    onSignupSuccess();
 
                     //
                 }else if(response.equals("2001"))
