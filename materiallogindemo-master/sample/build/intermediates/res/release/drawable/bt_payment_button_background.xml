@@ -5,4 +5,4 @@
     android:exitFadeDuration="@android:integer/config_shortAnimTime" >
     <item android:drawable="@color/bt_white_pressed" android:state_pressed="true" />
     <item android:drawable="@color/bt_white" />
-</selector><!-- From: file:/Users/lkorth/bt/braintree-android/Drop-In/src/main/res/drawable/bt_payment_button_background.xml --><!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/com.braintreepayments.api/braintree/1.7.3/res/drawable/bt_payment_button_background.xml -->
+</selector><!-- From: file:/Users/lkorth/bt/braintree-android/Drop-In/src/main/res/drawable/bt_payment_button_background.xml --><!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/com.braintreepayments.api/braintree/1.7.5/res/drawable/bt_payment_button_background.xml -->

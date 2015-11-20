@@ -83,6 +83,13 @@
                 android:hint="Phone Number" />
         </android.support.design.widget.TextInputLayout>
 
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="206dp"
+            android:layout_height="wrap_content"
+            android:text="@string/terms"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
         <!-- Signup Button -->
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_signup"

@@ -19,7 +19,7 @@
     <string msgid="3421042268587513524" name="abc_shareactionprovider_share_with">"Открыть доступ"</string>
     <string msgid="7165123711973476752" name="abc_shareactionprovider_share_with_application">"Открыть доступ пользователю %s"</string>
     <string msgid="1603543279005712093" name="abc_toolbar_collapse_description">"Свернуть"</string>
-    <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/com.braintreepayments.api/braintree/1.7.3/res/values-ru/values-ru.xml -->
+    <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/com.braintreepayments.api/braintree/1.7.5/res/values-ru/values-ru.xml -->
     <eat-comment/>
     <string name="bt_add_new_payment_method">Добавить новый способ оплаты</string>
     <string name="bt_add_payment_method">Добавить способ оплаты</string>
@@ -30,7 +30,7 @@
     <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/com.braintreepayments/card-form/2.0.1/res/values-ru/values-ru.xml -->
     <eat-comment/>
     <string name="bt_default_action_label">Покупка</string>
-    <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/com.braintreepayments.api/braintree/1.7.3/res/values-ru/values-ru.xml -->
+    <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/com.braintreepayments.api/braintree/1.7.5/res/values-ru/values-ru.xml -->
     <eat-comment/>
     <string name="bt_default_submit_button_text">Покупка</string>
     <string name="bt_descriptor_amex">AmEx</string>
@@ -48,7 +48,7 @@
     <string name="bt_form_hint_cvv">Код безопасности</string>
     <string name="bt_form_hint_expiration">Срок действия</string>
     <string name="bt_form_hint_postal_code">Индекс</string>
-    <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/com.braintreepayments.api/braintree/1.7.3/res/values-ru/values-ru.xml -->
+    <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/exploded-aar/com.braintreepayments.api/braintree/1.7.5/res/values-ru/values-ru.xml -->
     <eat-comment/>
     <string name="bt_form_pay_with_card_header">ОПЛАТИТЬ КАРТОЙ</string>
     <string name="bt_invalid_card">Сведения о банковской карте недействительны.</string>

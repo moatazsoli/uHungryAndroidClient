@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ListView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/open_orders_list"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+
+</ListView><!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/src/main/res/layout/open_orders_layout.xml --><!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/sample/build/intermediates/bundles/debug/res/layout/open_orders_layout.xml -->

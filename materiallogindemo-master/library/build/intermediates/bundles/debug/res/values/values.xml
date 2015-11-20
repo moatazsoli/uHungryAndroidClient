@@ -145,6 +145,7 @@
     <string name="states">States</string>
     <string name="submit">Submit</string>
     <string name="themed">Themed</string>
+    <string name="total_price">Total Price</string>
     <string name="useGoogleLocationServices">Use Google\'s Location Services?</string>
     <string name="useGoogleLocationServicesPrompt">Let Google help apps determine location. This means sending anonymous location data to Google, even when no apps are running.</string>
     <!-- From: file:/C:/Users/Moataz/uHungry/materiallogindemo-master/library/src/main/res/values/styles.xml -->
