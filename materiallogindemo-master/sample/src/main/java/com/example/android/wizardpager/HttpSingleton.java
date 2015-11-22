@@ -45,6 +45,12 @@ public class HttpSingleton {
         getRequestQueue().add(req);
     }
 
+    public void cancelPendingRequests(Object tag) {
+        if (mRequestQueue != null) {
+            mRequestQueue.cancelAll(tag);
+        }
+    }
+
     public ImageLoader getImageLoader() {
         return mImageLoader;
     }
