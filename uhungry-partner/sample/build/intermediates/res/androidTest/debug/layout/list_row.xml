@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/list_row_selector"
+    android:padding="8dp" >
+
+
+    <!-- Movie Title -->
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/title"
+        android:textStyle="bold" />
+
+    <!-- Rating -->
+    <TextView
+        android:id="@+id/restaurant"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:layout_marginTop="1dip"
+        android:textSize="@dimen/restaurant" />
+
+    <!-- Genre -->
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/restaurant"
+        android:layout_marginTop="5dp"
+        android:textColor="@color/status"
+        android:textSize="@dimen/status" />
+
+    <!-- Release Year -->
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:textColor="@color/time"
+        android:textSize="@dimen/time" />
+
+</RelativeLayout><!-- From: file:/C:/Users/Moataz/uHungry/uhungry-partner/sample/src/main/res/layout/list_row.xml --><!-- From: file:/C:/Users/Moataz/uHungry/uhungry-partner/sample/build/intermediates/bundles/debug/res/layout/list_row.xml -->

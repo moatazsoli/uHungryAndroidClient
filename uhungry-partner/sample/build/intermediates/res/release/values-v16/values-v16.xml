@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- From: file:/C:/Users/Moataz/uHungry/uhungry-partner/sample/build/intermediates/exploded-aar/uhungry-partner/library/unspecified/res/values-v16/values-v16.xml -->
+    <eat-comment/>
+    <style name="WizardPageContent">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">8dp</item>
+        <item name="android:paddingLeft">?android:attr/listPreferredItemPaddingLeft</item>
+        <item name="android:textSize">36sp</item>
+        <item name="android:textColor">#ff0099cc</item>
+        <item name="android:fontFamily">sans-serif-thin</item>
+    </style>
+    <style name="WizardPageTitle">
+        <item name="android:id">@android:id/title</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">8dp</item>
+        <item name="android:paddingLeft">?android:attr/listPreferredItemPaddingLeft</item>
+        <item name="android:textSize">36sp</item>
+        <item name="android:textColor">#ff0099cc</item>
+        <item name="android:fontFamily">sans-serif-thin</item>
+    </style>
+    <!-- From: file:/C:/Users/Moataz/uHungry/uhungry-partner/sample/build/intermediates/exploded-aar/com.braintreepayments/card-form/2.0.1/res/values-v16/values-v16.xml -->
+    <eat-comment/>
+    <style name="bt_base_textview">
+        <item name="android:textSize">@dimen/bt_input_text_size</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+    </style>
+    <!-- From: file:/C:/Users/Moataz/uHungry/uhungry-partner/sample/build/intermediates/exploded-aar/com.braintreepayments.api/braintree/1.7.5/res/values-v16/values-v16.xml -->
+    <eat-comment/>
+    <style name="bt_base_textview_bold">
+        <item name="android:textSize">@dimen/bt_default_text_size</item>
+        <item name="android:fontFamily">sans-serif-condensed</item>
+    </style>
+</resources>

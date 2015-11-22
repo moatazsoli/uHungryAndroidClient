@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:text="@string/comments_details"
+        android:textColor="#80000000"
+        android:textSize="@dimen/customTitle" />
+
+    <EditText
+        android:id="@+id/comments"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:hint="@string/drink_hint"
+        android:inputType="text"
+        android:textColor="#000000"
+        android:textSize="@dimen/customEntry" />
+
+</LinearLayout><!-- From: file:/C:/Users/Moataz/uHungry/uhungry-partner/library/src/main/res/layout/drink_details_1_comments_only.xml -->
